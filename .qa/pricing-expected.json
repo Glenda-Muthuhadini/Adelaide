@@ -1,0 +1,226 @@
+{
+  "offers": {
+    "Me-Time Special": [
+      [
+        "Per person",
+        "R380 P/P"
+      ],
+      [
+        "Hot stones",
+        "R100"
+      ]
+    ],
+    "Couples Massage Specials": [
+      [
+        "Swedish Couples Massage",
+        "R500"
+      ],
+      [
+        "Hot Stone Couples Massage",
+        "R700"
+      ],
+      [
+        "Hot Stones",
+        "R100"
+      ],
+      [
+        "Body Scrub",
+        "R100"
+      ],
+      [
+        "Foot Massage",
+        "R150"
+      ],
+      [
+        "Sip & Paint",
+        "R100 p/p"
+      ]
+    ],
+    "Birthday Package": [
+      [
+        "Price",
+        "R600"
+      ]
+    ],
+    "Group Wellness Special": [
+      [
+        "1 Person",
+        "R550"
+      ],
+      [
+        "2 People",
+        "R900"
+      ],
+      [
+        "3 People",
+        "R1,200"
+      ],
+      [
+        "4 People",
+        "R1,600"
+      ],
+      [
+        "Groups of 10 people",
+        "20% discount"
+      ]
+    ]
+  },
+  "inclusions": {
+    "Me-Time Special": [
+      "60-minute Swedish Massage",
+      "Complimentary drink",
+      "Gown & slippers"
+    ],
+    "Couples Massage Specials": [
+      "60 minutes",
+      "Complimentary drink",
+      "Gown & slippers",
+      "Relaxation experience",
+      "60 minutes",
+      "Complimentary drink",
+      "Gown & slippers",
+      "Relaxation experience"
+    ],
+    "Birthday Package": [
+      "60-minute Swedish Massage",
+      "Foot massage / Hot stones",
+      "Complimentary drink",
+      "Snack platter",
+      "Small gift"
+    ],
+    "Group Wellness Special": [
+      "60-minute massage",
+      "Hot stones",
+      "Lunch (wings & chips)",
+      "Complimentary drink (green tea / wine / juice)"
+    ]
+  },
+  "services": {
+    "Swedish Massage": [
+      [
+        "60 Minutes",
+        "R500"
+      ],
+      [
+        "90 Minutes",
+        "R750"
+      ]
+    ],
+    "Deep Tissue Massage": [
+      [
+        "60 Minutes",
+        "R550"
+      ],
+      [
+        "90 Minutes",
+        "R800"
+      ]
+    ],
+    "Hot Stone Massage": [
+      [
+        "60 Minutes",
+        "R600"
+      ],
+      [
+        "90 Minutes",
+        "R850"
+      ]
+    ],
+    "Sports Massage": [
+      [
+        "30 Minutes",
+        "R280"
+      ],
+      [
+        "60 Minutes",
+        "R600"
+      ]
+    ],
+    "Adelaide Signature Massage": [
+      [
+        "90 Minutes",
+        "R900"
+      ]
+    ],
+    "Signature Facial": [
+      [
+        "30 Minutes",
+        "R280"
+      ],
+      [
+        "60 Minutes",
+        "R400"
+      ]
+    ],
+    "Neck & Shoulder Massage": [
+      [
+        "Price",
+        "R220"
+      ]
+    ],
+    "Scalp Massage": [
+      [
+        "Price",
+        "R120"
+      ]
+    ],
+    "Hand Massage": [
+      [
+        "Price",
+        "R100"
+      ]
+    ],
+    "Hand & Shoulder Massage": [
+      [
+        "Price",
+        "R280"
+      ]
+    ],
+    "Body Back Massage": [
+      [
+        "Price",
+        "R350"
+      ]
+    ],
+    "Manual Lymph Drainage": [
+      [
+        "60 Minutes",
+        "R680"
+      ],
+      [
+        "90 Minutes",
+        "R850"
+      ]
+    ],
+    "Reflexology Massage": [
+      [
+        "60 Minutes",
+        "R500"
+      ]
+    ],
+    "Pregnancy Massage": [
+      [
+        "60 Minutes",
+        "R450"
+      ]
+    ],
+    "Ultimate Relaxation": [
+      [
+        "For one person",
+        "R450"
+      ]
+    ],
+    "Couples Retreat": [
+      [
+        "60-Minute Couples Massage",
+        "R500",
+        "Side by Side"
+      ],
+      [
+        "90-Minute Couples Massage",
+        "R1,100",
+        "with hot stones"
+      ]
+    ]
+  }
+}

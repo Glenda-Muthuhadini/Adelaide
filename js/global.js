@@ -2,6 +2,8 @@
 
 // Local line icons keep the page independent of external libraries.
 const spaIcons = {
+  gift: '<rect x="3" y="9" width="18" height="4" rx="1"/><path d="M5 13v9h14v-9M12 9v13M12 9C5 9 4 3 7 2c3-1 5 3 5 7Zm0 0c7 0 8-6 5-7-3-1-5 3-5 7Z"/>',
+  briefcase: '<rect x="2" y="7" width="20" height="15" rx="2"/><path d="M8 7V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3M2 12c5 4 15 4 20 0M10 13h4v4h-4Z"/>',
   star: '<path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/>',
   image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="16" cy="8" r="1.5"/><path d="m3 17 6-7 5 5 3-3 4 5"/>',
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v5m10-5v5M3 10h18M7 14h2m3 0h2m3 0h1M7 18h2m3 0h2"/>',
@@ -43,7 +45,7 @@ if (menuToggle && navigation) {
       menuToggle.focus();
     }
   });
-  window.matchMedia('(min-width: 761px)').addEventListener('change', (event) => {
+  window.matchMedia('(min-width: 1001px)').addEventListener('change', (event) => {
     if (event.matches) setMenuOpen(false);
   });
 }

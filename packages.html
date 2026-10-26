@@ -1,10 +1,12 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="assets/images/logo/Elegant%20Golden%20A%20Spa%20Emblem.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Packages | Adelaide Wellness Spa</title>
+  <meta name="description" content="Discover Specials &amp; Offers at Adelaide Wellness & Spa. Explore the Me-Time Special, Couples Massage Specials, Birthday Package and Group Wellness Special in Thohoyandou.">
+  <meta name="theme-color" content="#29331e">
+  <link rel="icon" type="image/png" href="assets/images/logo/Elegant%20Golden%20A%20Spa%20Emblem.png">
+  <title>Specials &amp; Offers | Adelaide Wellness & Spa</title>
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/packages.css">
   <script src="js/global.js" defer></script>
@@ -12,21 +14,96 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header>
-    <a class="brand" href="index.html">Adelaide Wellness Spa</a>
-    <nav aria-label="Main navigation">
+  <header class="site-header container">
+    <a class="brand" href="index.html" aria-label="Adelaide Wellness and Spa home"><img src="assets/images/logo/Adelaide%20Wellness%20Spa%20Emblem.png" alt="Adelaide Wellness & Spa" width="180" height="120"></a>
+    <button class="menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="treatments.html">Treatments</a>
-      <a href="packages.html">Packages</a>
+      <a href="services.html">Services</a>
+      <a href="packages.html" aria-current="page">Specials &amp; Offers</a>
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
+      <a class="button button-dark" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now</a>
     </nav>
   </header>
-  <main id="main">
-    <h1>Packages</h1>
-    <!-- Add packages page content here. -->
+  <main id="main" class="page-main specials-main">
+    <section class="specials-hero container" aria-labelledby="specials-title">
+      <div class="specials-hero-copy">
+        <p class="eyebrow">Special experiences</p>
+        <h1 id="specials-title">Specials &amp;<br>Offers</h1>
+        <p>Enjoy time for yourself, a couples massage, a birthday celebration or group wellness with our Adelaide specials and their included extras.</p>
+        <div class="button-row"><a class="button button-gold" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now <span aria-hidden="true">&rarr;</span></a><a class="button button-outline" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="whatsapp" aria-hidden="true"></span>WhatsApp us</a></div>
+      </div>
+      <div class="specials-placeholder specials-hero-image" role="img" aria-label="Specials &amp; Offers Hero Image placeholder: Couples / spa experience / relaxation"><span class="icon" data-icon="image" aria-hidden="true"></span><span>Specials &amp; Offers Hero Image</span><small>Couples / spa experience / relaxation</small></div>
+    </section>
+    <section class="signature-specials container" aria-labelledby="signature-title">
+      <div class="specials-section-heading"><p class="eyebrow">Our specials and offers</p><h2 id="signature-title">Signature Experiences</h2><p>Thoughtfully curated specials and offers to help you relax, reconnect and celebrate unforgettable moments.</p></div>
+      <div class="specials-card-grid">
+        <article class="special-card special-feature" id="me-time" aria-labelledby="me-time-title">
+          <div class="specials-placeholder special-card-image" role="img" aria-label="Promotion Image placeholder: Me-Time Special"><span class="offer-number" aria-hidden="true">01</span><span class="icon" data-icon="image" aria-hidden="true"></span><span>Promotion Image</span><small>Me-Time Special</small></div>
+          <div class="special-card-copy">
+            <p class="eyebrow offer-kicker">Experience 01</p>
+            <h3 id="me-time-title">Me-Time Special</h3>
+            <dl class="card-prices feature-price" aria-label="Promotional pricing"><div class="card-price-row"><dt>Per person</dt><dd>R380 P/P</dd></div></dl><div class="offer-detail-columns"><div><h4>What’s included</h4><ul class="promotion-inclusions "><li>60-minute Swedish Massage</li><li>Complimentary drink</li><li>Gown &amp; slippers</li></ul></div><div class="offer-extra"><h4>Make it your own</h4><p>Optional extra</p><dl class="card-prices " aria-label="Promotional pricing"><div class="card-price-row"><dt>Hot stones</dt><dd>R100</dd></div></dl></div></div>
+            <div class="offer-booking"><a class="button button-gold" href="https://wa.me/27673030683?text=Hi%20Adelaide%20Wellness%20%26%20Spa%2C%20I%20would%20like%20to%20book%20the%20Me-Time%20Special." target="_blank" rel="noopener noreferrer" aria-label="Book Me-Time Special on WhatsApp">Book now <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+        <article class="special-card special-feature" id="couples" aria-labelledby="couples-title">
+          <div class="specials-placeholder special-card-image" role="img" aria-label="Promotion Image placeholder: Couples Massage Specials"><span class="offer-number" aria-hidden="true">02</span><span class="icon" data-icon="image" aria-hidden="true"></span><span>Promotion Image</span><small>Couples Massage Specials</small></div>
+          <div class="special-card-copy">
+            <p class="eyebrow offer-kicker">Experience 02</p>
+            <h3 id="couples-title">Couples Massage Specials</h3>
+            <div class="couples-options"><div class="couples-option"><dl class="card-prices " aria-label="Promotional pricing"><div class="card-price-row"><dt>Swedish Couples Massage</dt><dd>R500</dd></div></dl><ul class="promotion-inclusions "><li>60 minutes</li><li>Complimentary drink</li><li>Gown &amp; slippers</li><li>Relaxation experience</li></ul></div><div class="couples-option"><dl class="card-prices " aria-label="Promotional pricing"><div class="card-price-row"><dt>Hot Stone Couples Massage</dt><dd>R700</dd></div></dl><ul class="promotion-inclusions "><li>60 minutes</li><li>Complimentary drink</li><li>Gown &amp; slippers</li><li>Relaxation experience</li></ul></div></div><div class="offer-addons"><h4>Available add-ons</h4><dl class="card-prices addon-prices" aria-label="Promotional pricing"><div class="card-price-row"><dt>Hot Stones</dt><dd>R100</dd></div><div class="card-price-row"><dt>Body Scrub</dt><dd>R100</dd></div><div class="card-price-row"><dt>Foot Massage</dt><dd>R150</dd></div><div class="card-price-row"><dt>Sip &amp; Paint</dt><dd>R100 p/p</dd></div></dl></div>
+            <div class="offer-booking"><a class="button button-gold" href="https://wa.me/27673030683?text=Hi%20Adelaide%20Wellness%20%26%20Spa%2C%20I%20would%20like%20to%20book%20the%20Couples%20Massage%20Specials." target="_blank" rel="noopener noreferrer" aria-label="Book Couples Massage Specials on WhatsApp">Book now <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+        <article class="special-card special-feature" id="birthday" aria-labelledby="birthday-title">
+          <div class="specials-placeholder special-card-image" role="img" aria-label="Promotion Image placeholder: Birthday Package"><span class="offer-number" aria-hidden="true">03</span><span class="icon" data-icon="image" aria-hidden="true"></span><span>Promotion Image</span><small>Birthday Package</small></div>
+          <div class="special-card-copy">
+            <p class="eyebrow offer-kicker">Experience 03</p>
+            <h3 id="birthday-title">Birthday Package</h3>
+            <dl class="card-prices feature-price" aria-label="Promotional pricing"><div class="card-price-row"><dt>Price</dt><dd>R600</dd></div></dl><h4>What’s included</h4><ul class="promotion-inclusions birthday-inclusions"><li>60-minute Swedish Massage</li><li>Foot massage / Hot stones</li><li>Complimentary drink</li><li>Snack platter</li><li>Small gift</li></ul>
+            <div class="offer-booking"><a class="button button-gold" href="https://wa.me/27673030683?text=Hi%20Adelaide%20Wellness%20%26%20Spa%2C%20I%20would%20like%20to%20book%20the%20Birthday%20Package." target="_blank" rel="noopener noreferrer" aria-label="Book Birthday Package on WhatsApp">Book now <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+        <article class="special-card special-feature" id="group" aria-labelledby="group-title">
+          <div class="specials-placeholder special-card-image" role="img" aria-label="Promotion Image placeholder: Group Wellness Special"><span class="offer-number" aria-hidden="true">04</span><span class="icon" data-icon="image" aria-hidden="true"></span><span>Promotion Image</span><small>Group Wellness Special</small></div>
+          <div class="special-card-copy">
+            <p class="eyebrow offer-kicker">Experience 04</p>
+            <h3 id="group-title">Group Wellness Special</h3>
+            <div class="group-details"><div><h4>Your group, your price</h4><dl class="card-prices group-prices" aria-label="Promotional pricing"><div class="card-price-row"><dt>1 Person</dt><dd>R550</dd></div><div class="card-price-row"><dt>2 People</dt><dd>R900</dd></div><div class="card-price-row"><dt>3 People</dt><dd>R1,200</dd></div><div class="card-price-row"><dt>4 People</dt><dd>R1,600</dd></div><div class="card-price-row"><dt>Groups of 10 people</dt><dd>20% discount</dd></div></dl></div><div><h4>Included in your visit</h4><ul class="promotion-inclusions "><li>60-minute massage</li><li>Hot stones</li><li>Lunch (wings &amp; chips)</li><li>Complimentary drink (green tea / wine / juice)</li></ul></div></div>
+            <div class="offer-booking"><a class="button button-gold" href="https://wa.me/27673030683?text=Hi%20Adelaide%20Wellness%20%26%20Spa%2C%20I%20would%20like%20to%20book%20the%20Group%20Wellness%20Special." target="_blank" rel="noopener noreferrer" aria-label="Book Group Wellness Special on WhatsApp">Book now <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="special-occasions dark-section" aria-labelledby="occasions-title"><div class="container">
+      <div class="specials-section-heading"><p class="eyebrow">Perfect for every occasion</p><h2 id="occasions-title">Create Meaningful Moments</h2></div>
+      <div class="occasion-grid">
+        <div class="occasion"><span class="icon occasion-icon" data-icon="heart" aria-hidden="true"></span><h3>Romantic Escapes</h3><p>Perfect for couples<br>and anniversaries.</p></div>
+        <div class="occasion"><span class="icon occasion-icon" data-icon="gift" aria-hidden="true"></span><h3>Birthdays</h3><p>Celebrate in a unique<br>and relaxing way.</p></div>
+        <div class="occasion"><span class="icon occasion-icon" data-icon="people" aria-hidden="true"></span><h3>Friends &amp; Family</h3><p>Wellness days for<br>groups and special occasions.</p></div>
+        <div class="occasion"><span class="icon occasion-icon" data-icon="leaf" aria-hidden="true"></span><h3>Me-Time</h3><p>Swedish massage<br>and time to unwind.</p></div>
+      </div>
+    </div></section>
+    <section class="custom-specials container" aria-labelledby="custom-title">
+      <div class="custom-specials-copy"><p class="eyebrow">Plan your visit</p><h2 id="custom-title">Find Your<br>Spa Experience</h2><p>Need help choosing? Get in touch about our Me-Time Special, Couples Massage Specials, Birthday Package or Group Wellness Special. We’ll help you plan your visit.</p><a class="button button-gold" href="https://wa.me/27673030683?text=Hello%20Adelaide%20Wellness%20%26%20Spa%2C%20please%20help%20me%20choose%20from%20your%20Me-Time%20Special%2C%20Couples%20Massage%20Specials%2C%20Birthday%20Package%20and%20Group%20Wellness%20Special." target="_blank" rel="noopener noreferrer">Enquire now <span aria-hidden="true">&rarr;</span></a></div>
+      <div class="specials-placeholder custom-specials-image" role="img" aria-label="Spa Experience Image placeholder: Spa setup / special occasion"><span class="icon" data-icon="image" aria-hidden="true"></span><span>Spa Experience Image</span><small>Spa setup / special occasion</small></div>
+    </section>
+    <section class="specials-cta dark-section" aria-labelledby="cta-title"><div class="container specials-cta-inner">
+      <div><h2 id="cta-title">Ready to Plan Your Experience?</h2><p>Get in touch today and let us help you create a memorable<br class="desktop-break"> and relaxing experience.</p></div>
+      <div class="button-row"><a class="button button-gold" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now <span aria-hidden="true">&rarr;</span></a><a class="button button-outline" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="whatsapp" aria-hidden="true"></span>WhatsApp us</a></div>
+    </div></section>
   </main>
-  <footer><p>Adelaide Wellness Spa</p></footer>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="footer-brand" href="index.html" aria-label="Adelaide Wellness and Spa home"><img src="assets/images/logo/Adelaide%20Wellness%20Spa%20Emblem.png" alt="Adelaide Wellness & Spa" width="220" height="147" loading="lazy"></a>
+      <address class="footer-contact"><a href="tel:+27673030683"><span class="icon" data-icon="phone" aria-hidden="true"></span><strong>067 303 0683</strong></a><p><span class="icon" data-icon="pin" aria-hidden="true"></span><span>Thohoyandou, Unit E,<br>Samvuni Street (Hamagidi)</span></p></address>
+      <div class="footer-hours"><span class="icon" data-icon="clock" aria-hidden="true"></span><p>09:00 – 19:00<br>Mon – Sun</p></div>
+      <div class="social-links" aria-label="Social media"><!-- Add verified profile URLs when available. --><span class="social-icon facebook" role="img" aria-label="Facebook">f</span><span class="social-icon instagram" role="img" aria-label="Instagram"><span class="icon" data-icon="instagram" aria-hidden="true"></span></span><span class="social-icon tiktok" role="img" aria-label="TikTok">♪</span></div>
+    </div>
+    <div class="footer-bottom container"><span class="footer-rule" aria-hidden="true"></span><p>Relax. Restore. Rejuvenate.</p><span class="footer-rule" aria-hidden="true"></span><small>A wellness experience for a better you.</small></div>
+  </footer>
 </body>
 </html>

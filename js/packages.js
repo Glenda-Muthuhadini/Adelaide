@@ -1,3 +1,3 @@
-﻿'use strict';
+'use strict';
 
-// Scripts for the packages page.
+// Offer details are visible on the page. Booking uses native WhatsApp links.
