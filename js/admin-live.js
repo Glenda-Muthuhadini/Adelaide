@@ -49,7 +49,13 @@
     $('#dashboard-view').hidden=!dashboard;$('#module-view').hidden=dashboard;
     const name=viewerName(),avatar=$('.account-button');
     avatar.textContent=profileInitials(name);avatar.title=name+' · Profile settings';avatar.setAttribute('aria-label','Profile settings for '+name);
-    $('#page-title').textContent=section==='Dashboard'?(data.viewer_display_name?'Welcome, '+name:'Welcome to Adelaide'):section;
+    const heading=$('#page-title');
+    if(section==='Dashboard'&&data.viewer_display_name){
+      const welcome=document.createElement('span'),person=document.createElement('span');
+      welcome.className='dashboard-welcome';welcome.textContent='Welcome,';
+      person.className='dashboard-person';person.textContent=name;
+      heading.replaceChildren(welcome,' ',person);
+    }else heading.textContent=section==='Dashboard'?'Welcome to Adelaide':section;
     if(!dashboard)renderModule();
   }
   function serviceOptions(all=false){return data.services.filter(s=>all||s.active).map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join('');}
