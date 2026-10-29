@@ -37,8 +37,6 @@ button { cursor: pointer; }
 .icon-button { display: inline-flex; justify-content: center; align-items: center; width: 44px; height: 44px; padding: 9px; border: 1px solid #d9cfb9; border-radius: 9px; background: #fffdf5b3; color: #51421a; flex: 0 0 auto; }
 .icon-button .di { width: 22px; height: 22px; }
 .icon-button:hover, .today-button:hover { background: #fff9e8; }
-.notification-button { position: relative; border-radius: 50%; width: 48px; height: 48px; border-color: white; }
-.notification-dot { position: absolute; top: 1px; right: 3px; width: 10px; height: 10px; border: 1px solid #fcf4dd; border-radius: 50%; background: #ca3833; }
 .sidebar-toggle { display: none; }
 .preview-indicator { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; font-size: 10px; letter-spacing: .3px; color: #6b644d; }
 .preview-indicator > span:first-child { width: 5px; height: 5px; border-radius: 50%; background: #a47a20; }
@@ -183,7 +181,6 @@ dialog::backdrop { background: #16200e85; backdrop-filter: blur(8px); }
 .detail-list dd { margin: 0; }
 .detail-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .detail-actions button { min-height: 44px; padding: 10px 15px; border: 1px solid #bbaa7c; border-radius: 7px; background: #eee6cf; color: #344028; }
-.toast { position: fixed; z-index: 50; bottom: 20px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 30px); padding: 14px 22px; border: 1px solid #dfc681; border-radius: 10px; color: #fff8e7; background: #303e23; box-shadow: 0 5px 20px #17200c33; font-size: 11px; }
 [hidden] { display: none !important; }
 @media (min-width: 1500px) { .schedule-heading { flex-wrap: nowrap; } }
 @media (max-width: 1400px) {
@@ -253,7 +250,6 @@ dialog::backdrop { background: #16200e85; backdrop-filter: blur(8px); }
  .date-picker input { flex: 1; }
  .header-walkin { justify-self: start; }
  .account-button { width: 42px; height: 42px; font-size: 16px; }
- .notification-button { width: 44px; height: 44px; }
  .preview-indicator { margin-top: 8px; }
  .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
  .stat-card { min-height: 138px; gap: 12px; }

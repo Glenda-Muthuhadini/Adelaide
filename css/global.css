@@ -144,3 +144,5 @@ body > main:not(:has(.hero)) { min-height: 60vh; }
 }
 
 .staff-profile-link{display:flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;border:1px solid #b99a59;border-radius:50%;background:#fff9edf5;color:#29331e;box-shadow:0 3px 15px #3b2c1510}.staff-profile-link svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.staff-profile-link:hover{background:#e8eddf}.staff-profile-link:focus-visible{outline:3px solid #ae7a28;outline-offset:3px}.site-header .staff-profile-link{order:3}.site-header:has(.staff-profile-link){gap:14px}@media(min-width:1001px) and (max-width:1200px){.site-header:has(.staff-profile-link) .main-navigation{gap:10px;padding-left:14px}.site-header:has(.staff-profile-link) .main-navigation>a:not(.button){font-size:13px}}@media(max-width:1000px){.site-header .staff-profile-link{order:0;margin-left:auto}.site-header:has(.staff-profile-link){gap:12px}}
+
+.treatment-card img[hidden],.catalogue-card img[hidden],.special-card img[hidden]{display:none}

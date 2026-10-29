@@ -10,7 +10,13 @@
   let reviewedBooking=null,reviewBusy=false;
   let appointmentQuery='';
   let profileNameDraft=null;
-  function toast(text){$('#toast').textContent=text;$('#toast').hidden=false;}
+  function showActionError(text){
+    const container=reviewDialog.open?document.querySelector('#staff-review-error'):dialog.open?(form.hidden?detail:form):document.querySelector(section==='Dashboard'?'#dashboard-view':'#module-view');
+    if(container.id==='staff-review-error'){container.textContent=text;container.focus();return;}
+    let message=container.querySelector('[data-action-error]');
+    if(!message){message=document.createElement('p');message.dataset.actionError='';message.className='live-error';message.setAttribute('role','alert');container.prepend(message);}
+    message.textContent=text;
+  }
   function deny(error){data=null;reviewedBooking=null;document.body.classList.add('admin-loading');const overlay=$('#admin-access-message');overlay.hidden=false;overlay.replaceChildren();const p=document.createElement('p');p.textContent=error.message;const a=document.createElement('a');a.href='admin-login.html';a.textContent='Go to admin sign in';overlay.append(p,a);dialog.close();reviewDialog.close();}
   async function load(){
     try{data=await Spa.rpc('spa_admin_data',{},true);render();}
@@ -47,8 +53,8 @@
     if(!dashboard)renderModule();
   }
   function serviceOptions(all=false){return data.services.filter(s=>all||s.active).map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join('');}
-  const catalogue=SpaCatalogue.create({getData:()=>data,refresh:load,toast,table});
-  const reports=SpaReports.create({getData:()=>data,refresh:load,toast,table});
+  const catalogue=SpaCatalogue.create({getData:()=>data,refresh:load,table});
+  const reports=SpaReports.create({getData:()=>data,refresh:load,table});
   function renderModule(){
     const catalogueHtml=catalogue.render(section);
     if(catalogueHtml!==null){$('#module-view').innerHTML=catalogueHtml;return;}
@@ -98,7 +104,7 @@
     reviewDialog.close();dialog.showModal();form.elements.customer.focus();
   }
   reviewDialog.addEventListener('cancel',event=>{event.preventDefault();backToBooking();});
-  async function change(action,payload){await Spa.rpc('spa_admin_change',{p_action:action,p_data:payload},true);await load();toast('Saved.');}
+  async function change(action,payload){await Spa.rpc('spa_admin_change',{p_action:action,p_data:payload},true);await load();}
   function closeSidebar(){const open=$('#sidebar').classList.contains('is-open');$('#sidebar').classList.remove('is-open');$('#sidebar').inert=innerWidth<=900;$('.sidebar-backdrop').hidden=true;$('.sidebar-toggle').setAttribute('aria-expanded','false');if(open)$('.sidebar-toggle').focus();}
   document.addEventListener('click',async event=>{
     const button=event.target.closest('button,a');if(!button)return;
@@ -119,15 +125,14 @@
         button.textContent='Scheduling…';
         try{
           const receipt=await Spa.rpc('spa_admin_schedule',{...reviewedBooking},true);
-          reviewDialog.close();reviewedBooking=null;await load();toast('Appointment '+receipt.reference+' confirmed and scheduled.');
+          reviewDialog.close();reviewedBooking=null;await load();
           const b=data.bookings.find(b=>b.reference===receipt.reference);if(b)openDetail(b.id);
         }finally{reviewBusy=false;button.textContent='Confirm and schedule';reviewDialog.querySelectorAll('button').forEach(b=>b.disabled=false);}
       }else if(button.id==='save-reschedule'){
         button.disabled=true;await change('reschedule',{id:editing.id,date:$('#reschedule-form').elements.date.value,time:$('#reschedule-form').elements.time.value,quote:preview.quote});openDetail(editing.id);
       }else if(button.hasAttribute('data-close-dialog'))dialog.close();
-      else if(button.hasAttribute('data-close-info'))$('#info-dialog').close();
-      else if(button.matches('.notification-button')){$('#info-content').innerHTML=bookingTable(data.bookings.filter(b=>b.status==='pending'));$('#info-dialog').showModal();}
-    }catch(error){toast(error.message);const p=reviewDialog.open?$('#staff-review-error'):$('#admin-booking-error');if(p){p.textContent=error.message;if(reviewDialog.open)p.focus();}}
+
+    }catch(error){showActionError(error.message);const p=reviewDialog.open?$('#staff-review-error'):$('#admin-booking-error');if(p){p.textContent=error.message;if(reviewDialog.open)p.focus();}}
     finally{if(button.isConnected)button.disabled=false;}
   });
   document.addEventListener('input',event=>{
@@ -155,7 +160,7 @@
         await Spa.rpc('spa_update_profile',{p_name:name},true);
         profileNameDraft=null;await load();
         const status=$('#profile-save-status');if(status)status.textContent='Your name has been saved.';
-        window.dispatchEvent(new Event('spa:session-changed'));toast('Profile name updated.');
+        window.dispatchEvent(new Event('spa:session-changed'));
       }else if(target.id==='change-password-form'){
         if(target.elements.password.value!==target.elements.confirmation.value)throw new Error('Passwords do not match.');
         await Spa.changePassword(target.elements.password.value);data=null;location.replace('admin-login.html');
@@ -166,7 +171,7 @@
         if(target.dataset.save==='block'){payload.starts_at+=':00+02:00';payload.ends_at+=':00+02:00';}
         await change(target.dataset.save,payload);if(target.dataset.save==='notes')openDetail(editing.id);
       }
-    }catch(error){toast(error.message);const p=target.id==='profile-name-form'?$('#profile-name-error'):$('#admin-booking-error');if(p)p.textContent=error.message;}
+    }catch(error){showActionError(error.message);const p=target.id==='profile-name-form'?$('#profile-name-error'):$('#admin-booking-error');if(p)p.textContent=error.message;}
     finally{if(submit?.isConnected)submit.disabled=false;}
   });
   $('#dashboard-date').addEventListener('change',event=>{selected=event.target.value||today();render();});
@@ -175,7 +180,8 @@
   $('#sidebar').addEventListener('keydown',event=>{if(event.key!=='Tab'||!$('#sidebar').classList.contains('is-open'))return;const nodes=[...$('#sidebar').querySelectorAll('a,button')],first=nodes[0],last=nodes[nodes.length-1];if(event.shiftKey&&event.target===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&event.target===last){event.preventDefault();first.focus();}});
   matchMedia('(max-width:900px)').addEventListener('change',closeSidebar);closeSidebar();
   try{
-    user=await Spa.requireAdmin();await load();document.body.classList.remove('admin-loading');$('#admin-access-message').hidden=true;
+    const [identity,initialData]=await Promise.all([Spa.requireAdmin(),Spa.rpc('spa_admin_data',{},true)]);
+    user=identity;data=initialData;render();document.body.classList.remove('admin-loading');$('#admin-access-message').hidden=true;
     setInterval(()=>{if(!document.hidden&&data)load().catch(()=>{});},60000);
     window.addEventListener('focus',()=>{if(data)load().catch(()=>{});});
   }catch(error){deny(error);}

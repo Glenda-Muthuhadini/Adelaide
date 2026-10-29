@@ -1,6 +1,6 @@
 'use strict';
 window.SpaCatalogue = {
-  create({getData,refresh,toast,table}) {
+  create({getData,refresh,table}) {
     const esc=Spa.escape;
     const labels={service:'service',addon:'add-on',promotion:'special or promotion',staff:'staff member'};
     const titles={Services:'Services','Add-ons':'Add-ons','Specials & Promotions':'Specials & Promotions',Staff:'Staff'};
@@ -9,7 +9,9 @@ window.SpaCatalogue = {
     const collections={service:'services',addon:'addons',promotion:'promotions'};
     const modal=document.createElement('dialog');
     modal.id='catalogue-dialog';modal.className='catalogue-dialog';modal.setAttribute('aria-labelledby','catalogue-dialog-title');document.body.append(modal);
-    let busy=false;
+    let busy=false,previewUrl=null,pendingImage=null;
+    const releasePreview=()=>{if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=null;};
+    const imageError=file=>!['image/jpeg','image/png','image/webp'].includes(file.type)?'Choose a JPG, PNG or WebP image.':!file.size||file.size>5*1024*1024?'Choose an image smaller than 5 MB.':'';
     const item=(kind,id)=>(getData()?.[collections[kind]]||[]).find(row=>row.id===id);
     const values=(options,selected)=>Object.entries(options).map(([value,label])=>'<option value="'+value+'" '+(String(selected)===value?'selected':'')+'>'+esc(label)+'</option>').join('');
     const actions=(kind,row)=>'<div class="catalogue-row-actions"><button type="button" data-catalogue-edit="'+kind+'" data-item-id="'+row.id+'" aria-label="Edit '+esc(row.name)+'">Edit</button><button type="button" data-catalogue-delete="'+kind+'" data-item-id="'+row.id+'" aria-label="Delete '+esc(row.name)+'">Delete</button></div>';
@@ -42,7 +44,7 @@ window.SpaCatalogue = {
       return '<input type="hidden" name="item_id" value="'+esc(row.id||'')+'"><label>Name<input name="name" required maxlength="120" value="'+esc(row.name||'')+'"></label><label>Status<select name="active">'+values({true:'Active',false:'Inactive'},row.active!==false)+'</select></label><label class="wide">Description <small>Optional</small><textarea name="description" maxlength="2000">'+esc(row.description||'')+'</textarea></label>';
     }
     function marketingFields(row={}) {
-      return '<label class="wide">What’s included <small>One item per line, optional</small><textarea name="inclusions" maxlength="4000">'+esc((row.inclusions||[]).join('\n'))+'</textarea></label><label class="wide">Photo path or URL <small>Optional</small><input name="image_path" maxlength="500" placeholder="assets/images/… or https://…" value="'+esc(row.image_path||'')+'"></label>';
+      return '<label class="wide">What’s included <small>One item per line, optional</small><textarea name="inclusions" maxlength="4000">'+esc((row.inclusions||[]).join('\n'))+'</textarea></label><fieldset class="wide catalogue-fieldset catalogue-photo"><legend>Photo</legend><input type="hidden" name="image_path" value="'+esc(row.image_path||'')+'"><label>Upload an image <small>Optional · JPG, PNG or WebP · Up to 5 MB</small><input name="image_file" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="catalogue-photo-status"></label><img class="catalogue-photo-preview" alt="Selected catalogue photo" '+(row.image_path?'src="'+esc(row.image_path)+'"':'hidden')+'><p id="catalogue-photo-status" role="status">'+(row.image_path?'Current photo. Choose a file to replace it.':'Choose a photo from your device.')+'</p><button type="button" data-remove-photo '+(row.image_path?'':'hidden')+'>Remove photo</button></fieldset>';
     }
     function serviceForm(row={}) {
       const d=getData();
@@ -74,6 +76,7 @@ window.SpaCatalogue = {
     function open(kind,id) {
       if(kind==='staff'&&getData()?.viewer_role!=='owner')throw new Error('Only the owner can add staff.');
       const row=id?item(kind,id):{};if(!row)return;
+      releasePreview();pendingImage=null;
       modal.innerHTML='<div class="dialog-heading"><h2 id="catalogue-dialog-title">'+(id?'Edit ':'Add ')+labels[kind]+'</h2><button type="button" data-close-catalogue aria-label="Close form">×</button></div><form class="live-form" data-catalogue-form="'+kind+'">'+(kind==='service'?serviceForm(row):kind==='addon'?addonForm(row):kind==='staff'?staffForm():promotionForm(row))+'<p class="live-error wide catalogue-error" role="alert"></p><div class="live-actions wide"><button class="button button-dark" type="submit">Save '+labels[kind]+'</button><button type="button" data-close-catalogue>Cancel</button></div></form>';
       modal.showModal();
     }
@@ -113,11 +116,11 @@ window.SpaCatalogue = {
       if(kind==='promotion'&&row.starts_on&&row.ends_on&&row.ends_on<row.starts_on)throw new Error('The end date must be on or after the start date.');
       return row;
     }
-    function showError(error) { const el=modal.querySelector('.catalogue-error');if(el)el.textContent=error.message;toast(error.message); }
+    function showError(error) { const el=modal.querySelector('.catalogue-error');if(el)el.textContent=error.message; }
     function lock(value) {busy=value;modal.querySelectorAll('button,input,select,textarea').forEach(el=>{if(value){el.dataset.wasDisabled=String(el.disabled);el.disabled=true;}else{el.disabled=el.dataset.wasDisabled==='true';delete el.dataset.wasDisabled;}});}
     document.addEventListener('click',async event=>{
       const button=event.target.closest('button');if(!button)return;
-      const relevant=button.matches('[data-catalogue-add],[data-catalogue-edit],[data-catalogue-delete],[data-close-catalogue],[data-confirm-catalogue-delete],[data-add-rate],[data-remove-rate]');
+      const relevant=button.matches('[data-catalogue-add],[data-catalogue-edit],[data-catalogue-delete],[data-close-catalogue],[data-confirm-catalogue-delete],[data-add-rate],[data-remove-rate],[data-remove-photo]');
       if(!relevant)return;event.preventDefault();event.stopImmediatePropagation();if(busy)return;
       try{
         if(button.dataset.catalogueAdd)open(button.dataset.catalogueAdd);
@@ -126,13 +129,34 @@ window.SpaCatalogue = {
         else if(button.hasAttribute('data-close-catalogue'))modal.close();
         else if(button.dataset.addRate){const list=modal.querySelector('[data-rate-list]');if(list.children.length>=30)throw new Error('Use at most 30 pricing options.');list.insertAdjacentHTML('beforeend',rateRow({},button.dataset.addRate==='discounts'));}
         else if(button.hasAttribute('data-remove-rate'))button.closest('.catalogue-rate').remove();
+        else if(button.hasAttribute('data-remove-photo')){
+          releasePreview();pendingImage=null;
+          const form=modal.querySelector('form');form.elements.image_file.value='';form.elements.image_path.value='';
+          const image=modal.querySelector('.catalogue-photo-preview');image.hidden=true;image.removeAttribute('src');button.hidden=true;
+          modal.querySelector('#catalogue-photo-status').textContent='Photo removed. Save to apply this change.';
+        }
         else if(button.dataset.confirmCatalogueDelete){
-          lock(true);await Spa.rpc('spa_admin_delete_catalogue',{p_kind:button.dataset.confirmCatalogueDelete,p_id:button.dataset.itemId},true);await refresh();modal.close();toast('Deleted from the catalogue.');
+          lock(true);await Spa.rpc('spa_admin_delete_catalogue',{p_kind:button.dataset.confirmCatalogueDelete,p_id:button.dataset.itemId},true);await refresh();modal.close();
         }
       }catch(error){showError(error);}finally{if(busy)lock(false);}
     });
     document.addEventListener('change',event=>{
       const input=event.target;
+      if(input.name==='image_file'&&modal.contains(input)){
+        const file=input.files[0];if(!file)return;
+        const error=imageError(file);if(error){
+          input.value='';releasePreview();
+          const image=modal.querySelector('.catalogue-photo-preview'),current=modal.querySelector('[name=image_path]').value;
+          image.hidden=!current;if(current)image.src=current;else image.removeAttribute('src');
+          modal.querySelector('[data-remove-photo]').hidden=!current;
+          modal.querySelector('#catalogue-photo-status').textContent=current?'Current photo. Choose a file to replace it.':'Choose a photo from your device.';
+          showError(new Error(error));return;
+        }
+        releasePreview();pendingImage=null;previewUrl=URL.createObjectURL(file);
+        const image=modal.querySelector('.catalogue-photo-preview');image.src=previewUrl;image.hidden=false;
+        modal.querySelector('[data-remove-photo]').hidden=false;modal.querySelector('.catalogue-error').textContent='';
+        modal.querySelector('#catalogue-photo-status').textContent=file.name+' · Ready to upload when you save.';
+      }
       if(input.dataset.durationToggle)modal.querySelectorAll('[data-duration-row="'+input.dataset.durationToggle+'"] input[type=number],[data-duration-row="'+input.dataset.durationToggle+'"] select').forEach(el=>el.disabled=!input.checked);
       if(input.dataset.rate==='kind'){const amount=input.closest('.catalogue-rate').querySelector('[data-rate=amount]');amount.max=input.value==='discount'?'100':'100000';}
     });
@@ -141,14 +165,22 @@ window.SpaCatalogue = {
       event.preventDefault();event.stopImmediatePropagation();if(busy||!form.reportValidity())return;
       try{
         const row=payload(form),kind=form.dataset.catalogueForm;
+        const file=form.elements.image_file?.files[0];
+        if(file){const error=imageError(file);if(error)throw new Error(error);}
         lock(true);
+        if(file){
+          const status=modal.querySelector('#catalogue-photo-status');status.textContent='Uploading image…';
+          if(!pendingImage||pendingImage.file!==file)pendingImage={file,url:await Spa.uploadImage(file)};
+          row.image_path=pendingImage.url;form.elements.image_path.value=row.image_path;
+          status.textContent='Image uploaded. Saving…';
+        }
         const result=kind==='staff'?await Spa.addStaff(row):await Spa.rpc('spa_admin_save_'+kind,{p_data:row},true);
         if(kind==='staff')form.reset();
         await refresh();modal.close();
-        toast(kind==='staff'?(result.existing_account?'Staff access added. The existing password is unchanged.':'Staff account added. No email confirmation is required.'):'Saved successfully.');
       }catch(error){showError(error);}finally{if(busy)lock(false);}
     });
     modal.addEventListener('cancel',event=>{if(busy)event.preventDefault();});
+    modal.addEventListener('close',releasePreview);
     return {render};
   }
 };

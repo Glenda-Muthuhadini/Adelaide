@@ -33,14 +33,20 @@ window.Spa = (() => {
   async function requireAdmin() {
     const access = await token();
     if (!access) throw new Error('Please sign in.');
-    const user = await request('/auth/v1/user', undefined, access, 'GET');
-    if (!await rpc('spa_is_admin', {}, true)) throw new Error('This account is not authorised for staff access. Contact the spa owner.');
+    const [user,authorised] = await Promise.all([
+      request('/auth/v1/user', undefined, access, 'GET'),
+      rpc('spa_is_admin', {}, true)
+    ]);
+    if (!authorised) throw new Error('This account is not authorised for staff access. Contact the spa owner.');
     return user;
   }
   async function login(email,password) {
     const data = await request('/auth/v1/token?grant_type=password',{email,password});
     save({...data,expires_at:Date.now()/1000+data.expires_in});
-    try { return await requireAdmin(); } catch (e) { await logout(); throw e; }
+    try {
+      if (!await rpc('spa_is_admin', {}, true)) throw new Error('This account is not authorised for staff access. Contact the spa owner.');
+      return data.user;
+    } catch (e) { await logout(); throw e; }
   }
   async function logout() {
     const access = await token();
@@ -77,6 +83,23 @@ window.Spa = (() => {
     if(!access)throw new Error('Sign in as the owner to add staff.');
     return request('/functions/v1/manage-staff',details,access);
   }
+  async function uploadImage(file) {
+    const types={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'};
+    if(!file||!types[file.type])throw new Error('Choose a JPG, PNG or WebP image.');
+    if(!file.size||file.size>5*1024*1024)throw new Error('Choose an image smaller than 5 MB.');
+    const bytes=new Uint8Array(await file.slice(0,12).arrayBuffer());
+    const matches=file.type==='image/jpeg'?bytes[0]===255&&bytes[1]===216&&bytes[2]===255:file.type==='image/png'?[137,80,78,71,13,10,26,10].every((n,i)=>bytes[i]===n):[82,73,70,70].every((n,i)=>bytes[i]===n)&&[87,69,66,80].every((n,i)=>bytes[i+8]===n);
+    if(!matches)throw new Error('This file is not a valid JPG, PNG or WebP image. Choose another photo.');
+    const access=await token();
+    if(!access)throw new Error('Please sign in before uploading an image.');
+    const path='catalogue/'+crypto.randomUUID()+'.'+types[file.type];
+    const response=await fetch(url+'/storage/v1/object/spa-catalogue/'+path,{
+      method:'POST',headers:{apikey:key,Authorization:'Bearer '+access,'Content-Type':file.type,'Cache-Control':'max-age=31536000','x-upsert':'false'},
+      body:file,signal:AbortSignal.timeout(60000)
+    });
+    if(!response.ok){let data;try{data=await response.json();}catch{}throw new Error(data?.message||data?.error||'Image upload failed. Please try again.');}
+    return url+'/storage/v1/object/public/spa-catalogue/'+path;
+  }
   async function staffIdentity() {
     if(!stored()?.access_token)return null;
     try {return await rpc('spa_staff_identity',{},true);} catch {return null;}
@@ -95,5 +118,5 @@ window.Spa = (() => {
   function schedule(q) {
     return '<p><strong>'+escape(q.service)+'</strong> · '+q.duration+' minutes per person · '+q.people+' people</p>'+(q.lines?.length?'<dl class="booking-price-lines">'+q.lines.map(line=>'<div><dt>'+escape(line.name)+'</dt><dd>'+money(line.total_cents)+'</dd></div>').join('')+'</dl>':'')+'<p>Total: <strong>'+money(q.total_cents)+'</strong></p><ol class="session-list">'+q.sessions.map(s=>'<li>'+date(s.starts_at)+' · '+time(s.starts_at)+'–'+time(s.ends_at)+' · <strong>'+s.people+' '+(s.people===1?'person':'people')+'</strong></li>').join('')+'</ol>'+(q.preparation_minutes?'<p>'+q.preparation_minutes+' minutes of preparation reserved after each session.</p>':'');
   }
-  return {rpc,login,logout,recover,reset,changePassword,addStaff,staffIdentity,acceptRecovery,requireAdmin,catalogue,escape,money,date,time,schedule};
+  return {rpc,login,logout,recover,reset,changePassword,addStaff,uploadImage,staffIdentity,acceptRecovery,requireAdmin,catalogue,escape,money,date,time,schedule};
 })();

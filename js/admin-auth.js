@@ -17,6 +17,8 @@
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(!ready||button.disabled||!form.reportValidity())return;
     button.disabled=true;
+    const label=button.innerHTML;
+    if(form.dataset.authMode==='login'){button.textContent='Signing in…';button.setAttribute('aria-busy','true');}
     try{
       if(form.dataset.authMode==='login'){
         await Spa.login(form.elements.email.value.trim(),password.value);form.reset();location.replace('admin-dashboard.html');
@@ -26,7 +28,7 @@
         await Spa.reset(password.value);form.reset();ready=false;say('Password updated. Sign in with your new password.');
         const link=document.createElement('a');link.href='admin-login.html';link.textContent='Return to sign in';status.append(' ',link);
       }else say('Staff accounts are created and authorised by the spa owner. Contact the owner for access.');
-    }catch(error){say(error.message);}finally{button.disabled=!ready;}
+    }catch(error){say(error.message);}finally{button.disabled=!ready;button.innerHTML=label;button.removeAttribute('aria-busy');}
   });
 })();
 

@@ -1,6 +1,6 @@
 'use strict';
 window.SpaReports={
-  create({getData,refresh,toast,table}){
+  create({getData,refresh,table}){
     const esc=Spa.escape;
     const names={appointments:'Appointments',clients:'Clients',services:'Services',addons:'Add-ons',promotions:'Specials & Promotions',staff:'Staff'};
     const categories={massages:'Massage therapies',facials:'Facial treatments',other:'Other treatments',addons:'Add-on therapies',packages:'Packages'};
@@ -55,8 +55,8 @@ window.SpaReports={
         const all=sections(getData()),combined=button.hasAttribute('data-download-all-reports'),key=button.dataset.downloadReport;
         const title=combined?'All reports':names[key];
         const result=await SpaReportPdf.download({title,sections:combined?Object.values(all):[all[key]],filename:'adelaide-'+(combined?'all-reports':key)+'-'+Spa.date(Date.now())+'.pdf',onProgress:pages=>setStatus('Preparing your PDF · '+pages+' '+(pages===1?'page':'pages'))});
-        setStatus(title+' PDF ready · '+result.pageCount+' '+(result.pageCount===1?'page':'pages')+'. Download started.');toast('PDF download started.');
-      }catch(error){setStatus(error.message);toast(error.message);}
+        setStatus(title+' PDF ready · '+result.pageCount+' '+(result.pageCount===1?'page':'pages')+'. Download started.');
+      }catch(error){setStatus(error.message);}
       finally{exporting=false;document.querySelectorAll('[data-download-report],[data-download-all-reports]').forEach(el=>el.disabled=false);}
     });
     return {render,sections};
