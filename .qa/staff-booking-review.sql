@@ -1,0 +1,36 @@
+begin;
+set local plpgsql.check_asserts=on;
+do $$
+declare uid uuid:=gen_random_uuid(); sess uuid:=gen_random_uuid(); opt uuid; d date:=(clock_timestamp() at time zone 'Africa/Johannesburg')::date+95;
+  q jsonb; result jsonb; retry jsonb; rid uuid:=gen_random_uuid(); blocked_rid uuid:=gen_random_uuid(); bid uuid; rejected boolean;
+begin
+  rejected:=false;begin perform public.spa_admin_schedule(null,null,null,null,null,null,null,null,null,null);exception when insufficient_privilege then rejected:=true;end;assert rejected,'Guest cannot confirm a booking';
+  insert into auth.users(id,email) values(uid,'qa-staff-scheduling@example.invalid');
+  insert into auth.sessions(id,user_id) values(sess,uid);
+  insert into public.spa_admins(user_id,role) values(uid,'admin');
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',uid,'role','authenticated','session_id',sess)::text,true);
+  assert not public.spa_is_owner(),'Test exercises ordinary staff, not only owner';
+  select o.id into opt from public.spa_options o join public.spa_services s on s.id=o.service_id where s.name='Swedish Massage' and o.duration=60 and o.active;
+  q:=public.spa_quote(opt,d,'10:00',10);
+  result:=public.spa_admin_schedule(opt,d,'10:00',10,'QA review group','0000000000','qa-scheduling@example.invalid',q->>'quote',rid,'telephone');
+  assert result->>'status'='confirmed','Final button returns confirmed';
+  select id into bid from public.spa_bookings where request_id=rid;
+  assert (select status='confirmed' from public.spa_bookings where id=bid),'Booking confirmed inside reservation transaction';
+  assert (select count(*)=3 and sum(people)=10 from public.spa_sessions where booking_id=bid),'Whole group scheduled';
+  retry:=public.spa_admin_schedule(opt,d,'10:00',10,'QA review group','0000000000','qa-scheduling@example.invalid',q->>'quote',rid,'telephone');
+  assert retry->>'reference'=result->>'reference' and retry->>'status'='confirmed','Interrupted confirmation retry is idempotent';
+  assert (select count(*)=3 from public.spa_sessions where booking_id=bid),'Retry cannot duplicate sessions';
+  perform public.spa_admin_change('status',jsonb_build_object('id',bid,'status','cancelled'));
+  rejected:=false;begin perform public.spa_admin_schedule(opt,d,'10:00',10,'QA review group','0000000000','qa-scheduling@example.invalid',q->>'quote',rid,'telephone');exception when raise_exception then rejected:=true;end;
+  assert rejected and (select status='cancelled' from public.spa_bookings where id=bid),'Confirmation retry cannot revive a cancelled booking';
+  q:=public.spa_quote(opt,d+1,'10:00',4);
+  result:=public.spa_submit(opt,d+1,'10:00',4,'QA customer request','0000000000','qa-customer@example.invalid',q->>'quote',gen_random_uuid());
+  assert result->>'status'='confirmed','Customer submissions confirm automatically';
+  rejected:=false;begin perform public.spa_admin_schedule(opt,d+1,'10:00',4,'QA blocked staff','0000000000','qa-blocked@example.invalid',q->>'quote',blocked_rid,'walkin');exception when raise_exception then rejected:=true;end;
+  assert rejected and not exists(select 1 from public.spa_bookings where request_id=blocked_rid),'Capacity change after review rejects without partial reservation';
+  delete from auth.sessions where id=sess;
+  rejected:=false;begin perform public.spa_admin_schedule(opt,d+2,'10:00',1,'QA revoked','0000000000','qa-revoked@example.invalid',q->>'quote',gen_random_uuid(),'walkin');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Logged-out staff denied';
+  assert not has_function_privilege('anon','public.spa_admin_schedule(uuid,date,time,integer,text,text,text,text,uuid,text)','execute');
+end $$;
+rollback;
+select 'PASS: ordinary staff can atomically confirm full group schedules; idempotent retries; cancelled bookings stay cancelled; review-time capacity races leave no partial records; customer bookings confirm automatically; guests and revoked sessions denied. Fixtures rolled back.' as result;

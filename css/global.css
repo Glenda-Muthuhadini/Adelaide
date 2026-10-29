@@ -21,6 +21,21 @@ h3 { font-size: clamp(20px, 2.05vw, 27px); }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 img { display: block; max-width: 100%; height: auto; }
+.image-placeholder > .photo-hot-stone, .service-placeholder > .photo-hot-stone, .gallery-placeholder .photo-hot-stone { object-position: center 75%; }
+.image-placeholder > .photo-facial, .service-placeholder > .photo-facial, .gallery-placeholder .photo-facial { object-position: 75% 70%; }
+.image-placeholder > .photo-reflexology, .service-placeholder > .photo-reflexology, .gallery-placeholder .photo-reflexology { object-position: 70% 65%; }
+.service-placeholder > .photo-sports, .gallery-placeholder .photo-sports { object-position: 70% 65%; }
+.service-placeholder > .photo-neck-shoulder, .gallery-placeholder .photo-neck-shoulder { object-position: 70% 65%; }
+.service-placeholder > .photo-scalp, .gallery-placeholder .photo-scalp { object-position: 70% 60%; }
+.service-placeholder > .photo-hand, .gallery-placeholder .photo-hand { object-position: 60% 70%; }
+.service-placeholder > .photo-lymph-drainage { object-position: center 70%; }
+.service-placeholder > .photo-deep-tissue { object-position: 65% 65%; }
+.service-placeholder > .photo-hand-shoulder { object-position: 65% 65%; }
+.service-placeholder > .photo-pregnancy { object-position: center 65%; }
+.client-image.client-initials, .client-portrait.client-initials { display: grid; place-items: center; background: linear-gradient(135deg, #445335, #29331e); border: 1px solid #c9aa68; color: #eed7a7; }
+.client-image.client-initials > span, .client-portrait.client-initials > span { padding: 0; border: 0; opacity: 1; font-family: var(--serif); font-weight: 400; line-height: 1; letter-spacing: 1px; text-transform: uppercase; }
+.client-image.client-initials > span { font-size: 20px; }
+.client-portrait.client-initials > span { font-size: clamp(30px, 5vw, 56px); }
 .container { width: min(var(--page-width), 93%); margin-inline: auto; }
 .icon { display: inline-flex; flex: 0 0 auto; width: 24px; height: 24px; align-items: center; justify-content: center; }
 .icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -59,6 +74,9 @@ img { display: block; max-width: 100%; height: auto; }
 .dark-section { color: var(--paper); background: radial-gradient(ellipse at 50% 50%, #3c472c, var(--olive) 80%); }
 .dark-section .eyebrow { color: #f2eadd; }
 .site-footer { padding-block: 25px 24px; background: var(--cream); color: var(--ink); font: 16px/1.45 var(--sans); }
+.developer-credit { margin: 16px 0 0; text-align: center; color: var(--muted); font: 12px/1.5 var(--sans); }
+.developer-credit .developer-link { display: inline-block; padding-block: 10px; color: #87590f; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.developer-credit .developer-link:hover { color: #57390a; text-decoration-thickness: 2px; }
 .footer-main { display: grid; grid-template-columns: 1.1fr 1.05fr .65fr .65fr; align-items: center; gap: 30px; }
 .footer-brand img { width: 220px; border-radius: 4px; }
 .footer-contact { font-style: normal; padding-left: 30px; border-left: 1px solid var(--gold-light); font-size: 14px; }
@@ -125,3 +143,4 @@ body > main:not(:has(.hero)) { min-height: 60vh; }
   .main-navigation > a:not(.button) { min-height: 44px; }
 }
 
+.staff-profile-link{display:flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;border:1px solid #b99a59;border-radius:50%;background:#fff9edf5;color:#29331e;box-shadow:0 3px 15px #3b2c1510}.staff-profile-link svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.staff-profile-link:hover{background:#e8eddf}.staff-profile-link:focus-visible{outline:3px solid #ae7a28;outline-offset:3px}.site-header .staff-profile-link{order:3}.site-header:has(.staff-profile-link){gap:14px}@media(min-width:1001px) and (max-width:1200px){.site-header:has(.staff-profile-link) .main-navigation{gap:10px;padding-left:14px}.site-header:has(.staff-profile-link) .main-navigation>a:not(.button){font-size:13px}}@media(max-width:1000px){.site-header .staff-profile-link{order:0;margin-left:auto}.site-header:has(.staff-profile-link){gap:12px}}

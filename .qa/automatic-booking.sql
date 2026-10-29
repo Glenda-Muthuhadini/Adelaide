@@ -1,0 +1,30 @@
+begin;
+set local plpgsql.check_asserts=on;
+do $$
+declare opt uuid; other_opt uuid; d date:=(clock_timestamp() at time zone 'Africa/Johannesburg')::date+110; q jsonb; result jsonb; retry jsonb; rid uuid:=gen_random_uuid(); blocked uuid:=gen_random_uuid(); bid uuid; rejected boolean;
+begin
+  select o.id into opt from public.spa_options o join public.spa_services s on s.id=o.service_id where s.name='Swedish Massage' and o.duration=60 and o.active;
+  select o.id into other_opt from public.spa_options o join public.spa_services s on s.id=o.service_id where s.name='Signature Facial' and o.duration=60 and o.active;
+  q:=public.spa_quote(opt,d,'10:00',10);
+  result:=public.spa_submit(opt,d,'10:00',10,'QA automatic group','0000000000','qa-auto@example.invalid',q->>'quote',rid);
+  assert result->>'status'='confirmed','Customer is immediately confirmed without admin';
+  select id into bid from public.spa_bookings where request_id=rid;
+  assert (select status='confirmed' from public.spa_bookings where id=bid);
+  assert (select count(*)=3 and sum(people)=10 from public.spa_sessions where booking_id=bid),'All group sessions reserved';
+  retry:=public.spa_submit(opt,d,'10:00',10,'QA automatic group','0000000000','qa-auto@example.invalid',q->>'quote',rid);
+  assert retry->>'reference'=result->>'reference' and retry->>'status'='confirmed','Lost-response retry returns same confirmed booking';
+  assert (select count(*)=3 from public.spa_sessions where booking_id=bid),'Retry never duplicates';
+  update public.spa_bookings set hold_until=clock_timestamp()-interval '1 day' where id=bid;
+  rejected:=false;begin perform public.spa_quote(other_opt,d,'10:00',1);exception when raise_exception then rejected:=true;end;assert rejected,'Confirmed booking never expires as a pending hold';
+  q:=public.spa_quote(opt,d+1,'10:00',4);
+  perform public.spa_submit(opt,d+1,'10:00',4,'QA last spaces','0000000000','qa-last@example.invalid',q->>'quote',gen_random_uuid());
+  rejected:=false;begin perform public.spa_submit(opt,d+1,'10:00',4,'QA stale review','0000000000','qa-stale@example.invalid',q->>'quote',blocked);exception when raise_exception then rejected:=true;end;
+  assert rejected and not exists(select 1 from public.spa_bookings where request_id=blocked),'Slot filled after review rejects immediately and atomically';
+  assert not exists(select 1 from jsonb_array_elements(public.spa_availability(other_opt,d+1,1)) slot where slot->>'time'='10:00'),'Full slot excluded across services';
+  assert exists(select 1 from jsonb_array_elements(public.spa_availability(other_opt,d+1,1)) slot where slot->>'time'='11:00'),'Alternative times offered';
+  assert jsonb_array_length(public.spa_availability(opt,d,40))=0,'Oversized full-day group receives no invalid times';
+  update public.spa_bookings set status='cancelled' where id=bid;
+  assert public.spa_quote(other_opt,d,'10:00',4) is not null,'Cancellation releases confirmed spaces';
+end $$;
+rollback;
+select 'PASS: guest booking immediately confirmed; full group reserved; no approval or hold expiry; idempotent lost-response retry; filled slot rejected without a record; shared capacity and alternative times correct; cancellation releases spaces. Fixtures rolled back.' as result;

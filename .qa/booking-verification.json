@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-29",
+  "project": "zhezlhajzdzdyronuxao",
+  "database_integration": "passed, fixtures rolled back",
+  "simultaneous_submissions": "two requests for four remaining spaces: exactly one accepted; fixtures removed",
+  "browser": "passed against real Supabase API using installed Chrome",
+  "viewports": [320, 390, 768, 1440],
+  "owner_login_without_confirmation_email": "passed",
+  "guest_booking": "passed: 10 people, three consecutive sessions, reviewed price, pending reference",
+  "admin_actions": "passed: confirm, private notes, reschedule, cancel, occupancy, calendar, services, logout",
+  "invalid_recovery_link": "reset form disabled",
+  "remaining_test_bookings": 0,
+  "production_followup": [
+    "Establish actual preparation time; current configurable default is zero minutes",
+    "Configure deployed HTTPS recovery redirect and production SMTP; delivery not exercised",
+    "Review Supabase Auth leaked-password protection setting"
+  ]
+}

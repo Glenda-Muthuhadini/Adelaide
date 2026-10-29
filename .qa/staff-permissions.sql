@@ -1,0 +1,37 @@
+begin;
+set local plpgsql.check_asserts=on;
+do $$
+declare owner_uid uuid:=gen_random_uuid(); staff_uid uuid:=gen_random_uuid(); customer_uid uuid:=gen_random_uuid(); owner_session uuid:=gen_random_uuid(); staff_session uuid:=gen_random_uuid(); customer_session uuid:=gen_random_uuid(); rejected boolean; result jsonb;
+begin
+  assert public.spa_staff_identity() is null,'Guest has no staff profile';
+  assert not has_function_privilege('anon','public.spa_owner_add_staff(uuid,text)','execute');
+  insert into auth.users(id,email) values(owner_uid,'qa-owner-permissions@example.invalid'),(staff_uid,'qa-staff-permissions@example.invalid'),(customer_uid,'qa-customer-permissions@example.invalid');
+  insert into auth.sessions(id,user_id) values(owner_session,owner_uid),(staff_session,staff_uid),(customer_session,customer_uid);
+  insert into public.spa_admins(user_id,role) values(owner_uid,'owner');
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',owner_uid,'role','authenticated','session_id',owner_session)::text,true);
+  assert public.spa_is_owner(),'Live owner session authorised';
+  assert public.spa_admin_data()->>'viewer_role'='owner','Owner UI permission comes from database';
+  assert public.spa_staff_identity()->>'role'='owner','Owner profile identity';
+  assert public.spa_owner_staff_lookup('qa-staff-permissions@example.invalid')->>'id'=staff_uid::text;
+  result:=public.spa_owner_add_staff(staff_uid,'New Staff Member');
+  assert result->>'role'='admin','New staff never becomes owner';
+  assert (select display_name='New Staff Member' and role='admin' and active from public.spa_admins where user_id=staff_uid);
+  rejected:=false;begin perform public.spa_owner_add_staff(owner_uid,'Replace Owner');exception when raise_exception then rejected:=true;end;
+  assert rejected,'Owner cannot accidentally demote owner';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',staff_uid,'role','authenticated','session_id',staff_session,'user_metadata',jsonb_build_object('role','owner'))::text,true);
+  assert public.spa_is_admin() and not public.spa_is_owner(),'Staff is authorised but not owner despite forged metadata';
+  assert public.spa_staff_identity()->>'name'='New Staff Member';
+  assert public.spa_admin_data()->>'viewer_role'='admin','Staff UI cannot claim owner';
+  rejected:=false;begin perform public.spa_owner_add_staff(customer_uid,'Escalation');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Staff cannot add staff through direct RPC';
+  rejected:=false;begin perform public.spa_owner_staff_lookup('qa-customer-permissions@example.invalid');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Staff cannot look up Auth accounts';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',customer_uid,'role','authenticated','session_id',customer_session)::text,true);
+  assert public.spa_staff_identity() is null,'Authenticated customer has no profile icon identity';
+  assert not public.spa_is_owner();
+  rejected:=false;begin perform public.spa_owner_add_staff(customer_uid,'Self registration');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Customer cannot register as staff';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',owner_uid,'role','authenticated','session_id',owner_session)::text,true);
+  delete from auth.sessions where id=owner_session;
+  assert not public.spa_is_owner() and public.spa_staff_identity() is null,'Signed-out owner immediately loses identity and creation rights';
+  rejected:=false;begin perform public.spa_owner_add_staff(customer_uid,'Revoked owner');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Old owner token cannot create staff';
+end $$;
+rollback;
+select 'PASS: only live owner sessions can add staff; fixed non-owner role; staff/customer/forged metadata rejected; staff table permissions; public identity hides guests and customers; session revocation enforced. Fixtures rolled back.' as result;

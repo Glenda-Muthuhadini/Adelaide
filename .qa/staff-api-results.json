@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "fixtureId": "2e1229ae-7e60-4bf0-93b5-741bed78c9a0",
+  "fixtureEmail": "qa-staff-5f641cf6-4d81-4c29-b662-afa0c50420c9@example.invalid",
+  "forbiddenEmail": "qa-forbidden-5f641cf6-4d81-4c29-b662-afa0c50420c9@example.invalid",
+  "ownerOnlyCreation": true,
+  "noEmailConfirmation": true,
+  "staffIdentity": true,
+  "staffCreationDenied": true,
+  "guestDenied": true,
+  "existingPasswordPreserved": true,
+  "logoutRevocation": true
+}

@@ -1,0 +1,77 @@
+:root {
+  --loader-green: #1f6b3a;
+  --loader-green-light: #74a67f;
+  --loader-bg: #f8f6f0;
+  --loader-track: rgba(31, 107, 58, 0.10);
+}
+
+/* JavaScript enables the overlay; pages remain usable without it. */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #ffffff 0%, var(--loader-bg) 55%, #f0eee7 100%);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-active .page-loader { display: flex; }
+.page-loader.loader-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.page-loader .loader-wrap { display: flex; align-items: center; justify-content: center; }
+.page-loader .loader-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--loader-green) 0deg, var(--loader-green-light) 105deg, var(--loader-track) 105deg, var(--loader-track) 360deg);
+  animation: loaderSpin 1.4s linear infinite;
+  box-shadow: 0 15px 40px rgba(31, 107, 58, 0.08);
+}
+.page-loader .loader-ring::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--loader-bg);
+}
+.page-loader .spa-mark {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 52px;
+  animation: loaderCounterSpin 1.4s linear infinite;
+}
+.page-loader .leaf {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 36px;
+  border: 3px solid var(--loader-green);
+  border-radius: 100% 0 100% 0;
+  background: transparent;
+}
+.page-loader .leaf-left { left: 5px; top: 16px; transform: rotate(-52deg); }
+.page-loader .leaf-center { left: 19px; top: 0; transform: rotate(-45deg); }
+.page-loader .leaf-right { right: 5px; top: 16px; transform: rotate(38deg); }
+.page-loader .loader-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes loaderSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes loaderCounterSpin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .page-loader .loader-ring, .page-loader .spa-mark { animation: none; }
+  .page-loader { transition: none; }
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#29331e"><title>Admin Dashboard | Adelaide Wellness &amp; Spa</title><link rel="icon" href="assets/images/logo/Elegant%20Golden%20A%20Spa%20Emblem.png"><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/admin-dashboard.css"><link rel="stylesheet" href="css/booking.css"><script src="js/spa-api.js" defer></script><script src="js/admin-icons.js" defer></script><script src="js/admin-catalogue.js" defer></script><script src="js/report-pdf.js" defer></script><script src="js/admin-reports.js" defer></script><script src="js/admin-live.js" defer></script><link rel="stylesheet" href="css/loader.css">
+<script src="js/loader.js"></script>
+<link rel="stylesheet" href="css/dialog-behavior.css">
+<script src="js/dialog-behavior.js" defer></script>
+</head>
+<body class="dashboard-page admin-loading">
+<!-- ADELAIDE WELLNESS SPA LOADER -->
+<div id="page-loader" class="page-loader" role="status" aria-live="polite"><div class="loader-wrap"><div class="loader-ring"><div class="spa-mark" aria-hidden="true"><span class="leaf leaf-left"></span><span class="leaf leaf-center"></span><span class="leaf leaf-right"></span></div></div></div><span class="loader-status">Loading Adelaide Wellness &amp; Spa…</span></div>
+<div class="admin-access-message" id="admin-access-message" role="status">Checking staff access…<noscript>JavaScript is required. <a href="admin-login.html">Admin sign in</a></noscript></div><a class="skip-link" href="#main">Skip to dashboard</a>
+<aside class="dashboard-sidebar" id="sidebar" aria-label="Admin navigation">
+<a class="dashboard-brand" href="index.html" aria-label="Adelaide Wellness and Spa home"><img src="assets/images/logo/Adelaide%20Wellness%20%26%20Spa%20Logo.png" alt="Adelaide Wellness &amp; Spa" width="1516" height="1038"></a>
+<nav class="dashboard-navigation" aria-label="Staff portal"><button type="button" data-section="Dashboard" aria-current="page"><span class="di" data-icon="home" aria-hidden="true"></span><span>Dashboard</span></button><button type="button" data-section="Appointments" ><span class="di" data-icon="calendar" aria-hidden="true"></span><span>Appointments</span></button><button type="button" data-section="Clients" ><span class="di" data-icon="people" aria-hidden="true"></span><span>Clients</span></button><button type="button" data-section="Services" ><span class="di" data-icon="lotus" aria-hidden="true"></span><span>Services</span></button><button type="button" data-section="Add-ons" ><span class="di" data-icon="plus" aria-hidden="true"></span><span>Add-ons</span></button><button type="button" data-section="Specials & Promotions" ><span class="di" data-icon="tag" aria-hidden="true"></span><span>Specials & Promotions</span></button><button type="button" data-section="Staff" ><span class="di" data-icon="user" aria-hidden="true"></span><span>Staff</span></button><button type="button" data-section="Reports" ><span class="di" data-icon="chart" aria-hidden="true"></span><span>Reports</span></button></nav>
+<div class="sidebar-bottom"><a class="sidebar-logout" href="admin-login.html"><span class="di" data-icon="logout" aria-hidden="true"></span><span>Log out</span></a></div>
+</aside>
+<button class="sidebar-backdrop" type="button" aria-label="Close navigation" hidden></button>
+<main id="main" class="page-main dashboard-main">
+<header class="dashboard-header"><div class="heading-group"><button class="sidebar-toggle icon-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><span class="di" data-icon="menu" aria-hidden="true"></span></button><div><h1 id="page-title">Good morning, Admin</h1></div></div><div class="header-actions"><label class="date-picker"><span class="di" data-icon="calendar" aria-hidden="true"></span><span class="sr-only">Dashboard date</span><input type="date" id="dashboard-date"></label><button class="header-walkin" type="button" data-create="walkin"><span class="di" data-icon="userplus" aria-hidden="true"></span>Add Walk-in</button><button class="notification-button icon-button" type="button" aria-label="View notifications"><span class="di" data-icon="bell" aria-hidden="true"></span><span class="notification-dot"></span></button><button class="account-button avatar" type="button" data-section="Profile settings" aria-label="Open profile settings" title="Profile settings">AD</button></div></header>
+<div id="dashboard-view">
+<section class="stats-grid" aria-label="Appointment overview">
+<article class="stat-card glass"><span class="stat-icon"><span class="di" data-icon="calendar" aria-hidden="true"></span></span><div><strong class="stat-number" id="stat-total">0</strong><p>Today's Appointments</p><span class="stat-detail">For the selected date</span></div></article><article class="stat-card glass"><span class="stat-icon"><span class="di" data-icon="user" aria-hidden="true"></span></span><div><strong class="stat-number" id="stat-walkin">0</strong><p>Walk-in Clients</p><span class="stat-detail">For the selected date</span></div></article><article class="stat-card glass"><span class="stat-icon"><span class="di" data-icon="check" aria-hidden="true"></span></span><div><strong class="stat-number" id="stat-completed">0</strong><p>Completed</p><span class="stat-detail">For the selected date</span></div></article><article class="stat-card glass"><span class="stat-icon"><span class="di" data-icon="cancel" aria-hidden="true"></span></span><div><strong class="stat-number" id="stat-cancelled">0</strong><p>Cancelled</p><span class="stat-detail">For the selected date</span></div></article>
+</section>
+<section class="quick-actions" aria-label="Quick actions">
+<button type="button" class="quick-card quick-0" data-create="new"><span class="di" data-icon="calendar" aria-hidden="true"></span><span><strong>New Appointment</strong><small>Book a client appointment</small></span><span class="quick-arrow"><span class="di" data-icon="arrow" aria-hidden="true"></span></span></button><button type="button" class="quick-card quick-1" data-create="walkin"><span class="di" data-icon="userplus" aria-hidden="true"></span><span><strong>Add Walk-in</strong><small>Add a walk-in client</small></span><span class="quick-arrow"><span class="di" data-icon="arrow" aria-hidden="true"></span></span></button><button type="button" class="quick-card quick-2" data-section="Clients"><span class="di" data-icon="people" aria-hidden="true"></span><span><strong>Manage Clients</strong><small>View customer contact details</small></span><span class="quick-arrow"><span class="di" data-icon="arrow" aria-hidden="true"></span></span></button><button type="button" class="quick-card quick-3" data-section="Services"><span class="di" data-icon="lotus" aria-hidden="true"></span><span><strong>Manage Services</strong><small>Update services, prices and duration</small></span><span class="quick-arrow"><span class="di" data-icon="arrow" aria-hidden="true"></span></span></button>
+</section>
+<div class="dashboard-columns">
+<section class="appointments-panel glass" aria-labelledby="appointments-title"><div class="panel-heading"><h2 id="appointments-title">Today’s Appointments</h2><button class="text-button" type="button" data-section="Appointments">View all <span class="di" data-icon="arrow" aria-hidden="true"></span></button></div><div id="appointment-list" class="appointment-list"></div></section>
+
+</div>
+</div>
+<section id="module-view" class="module-panel glass" aria-label="Selected admin section" hidden></section>
+</main>
+<dialog id="appointment-dialog" class="appointment-dialog" aria-labelledby="dialog-title">
+<div class="dialog-heading">
+  <div class="dialog-title-group"><span class="dialog-seal"><span class="di" data-icon="calendar" aria-hidden="true"></span></span><div><p class="dialog-eyebrow">Adelaide Wellness &amp; Spa</p><h2 id="dialog-title">New appointment</h2></div></div>
+  <button class="dialog-close" type="button" data-close-dialog aria-label="Close dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+</div>
+<form id="appointment-form">
+<p class="dialog-intro">A little time set aside for wellbeing.</p>
+<div class="form-sections">
+<fieldset class="form-section"><legend><span aria-hidden="true">01</span> Client details</legend><div class="dialog-fields">
+<label>Client name<input name="client" placeholder="Full name" required maxlength="100" autocomplete="name"></label>
+<label><span>Phone number <small>Optional</small></span><input name="phone" type="tel" placeholder="e.g. 067 303 0683" maxlength="30" autocomplete="tel"></label>
+</div></fieldset>
+<fieldset class="form-section"><legend><span aria-hidden="true">02</span> The treatment</legend><div class="dialog-fields">
+<label>Service<select name="service"><option>Swedish Massage</option><option>Classic Facial</option><option>Gel Manicure</option><option>Deep Tissue Massage</option><option>Body Scrub</option><option>Gel Pedicure</option></select></label>
+<label>Duration<select name="duration"><option value="30">30 minutes</option><option value="60" selected>60 minutes</option><option value="90">90 minutes</option></select></label>
+</div></fieldset>
+<fieldset class="form-section"><legend><span aria-hidden="true">03</span> The visit</legend><div class="dialog-fields">
+<label>Date<input name="date" type="date" required></label>
+<label>Starting time<select name="time"></select></label>
+<label>Number of people<input name="people" type="number" min="1" max="40" value="1" required></label>
+<label>Status<select name="status"><option value="pending">Pending</option><option value="confirmed">Confirmed</option><option value="arrived">Arrived</option></select></label>
+</div></fieldset>
+</div>
+<div class="booking-guidance"><span class="di" data-icon="people" aria-hidden="true"></span><p>Up to four people per service at a time. Larger groups are arranged across consecutive sessions.</p></div>
+<p id="booking-error" role="alert" tabindex="-1" hidden></p>
+<div class="form-actions"><p>Review every session before saving.</p><div><button class="form-cancel" type="button" data-close-dialog>Cancel</button><button class="button button-dark form-save" type="submit">Add appointment <span class="di" data-icon="arrow" aria-hidden="true"></span></button></div></div>
+</form>
+<div id="appointment-detail" hidden></div>
+</dialog>
+<dialog id="booking-review-dialog" class="appointment-review-dialog" aria-labelledby="booking-review-title">
+<div class="dialog-heading"><div><p class="dialog-eyebrow">Step 2 of 2</p><h2 id="booking-review-title" tabindex="-1">Review appointment</h2></div><button class="dialog-close" type="button" data-back-booking aria-label="Back to appointment details">×</button></div>
+<div id="staff-booking-review" class="staff-booking-review"></div>
+<p id="staff-review-error" class="live-error" role="alert" tabindex="-1"></p>
+<div class="staff-review-actions"><button type="button" class="button button-outline" data-back-booking>Back to edit</button><button type="button" id="admin-submit-booking" class="button button-dark">Confirm and schedule</button></div>
+</dialog>
+<dialog id="info-dialog" aria-labelledby="info-title"><div class="dialog-heading"><h2 id="info-title">Notifications</h2><button class="icon-button" type="button" data-close-info aria-label="Close notifications">×</button></div><div id="info-content"></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

@@ -1,0 +1,350 @@
+{
+  "services": [
+    {
+      "name": "Swedish Massage",
+      "category": "massages",
+      "description": "Relaxing full-body massage to ease tension and improve circulation.",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/professional-spa-massage-therapy.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R500"
+        },
+        {
+          "label": "90 Minutes",
+          "display": "R750"
+        }
+      ]
+    },
+    {
+      "name": "Deep Tissue Massage",
+      "category": "massages",
+      "description": "Focused pressure to relieve muscle tension and promote recovery.",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-teal-walled-spa-massage.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R550"
+        },
+        {
+          "label": "90 Minutes",
+          "display": "R800"
+        }
+      ]
+    },
+    {
+      "name": "Hot Stone Massage",
+      "category": "massages",
+      "description": "Soothing warmth for deep relaxation and stress relief.",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/tranquil-hot-stone-spa-treatment.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R600"
+        },
+        {
+          "label": "90 Minutes",
+          "display": "R850"
+        }
+      ]
+    },
+    {
+      "name": "Sports Massage",
+      "category": "massages",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/tranquil-spa-massage-in-teal-room.jpg",
+      "prices": [
+        {
+          "label": "30 Minutes",
+          "display": "R280"
+        },
+        {
+          "label": "60 Minutes",
+          "display": "R600"
+        }
+      ]
+    },
+    {
+      "name": "Adelaide Signature Massage",
+      "category": "massages",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/hero/Serene%20Warm-Lit%20Spa%20Massage.png",
+      "prices": [
+        {
+          "label": "90 Minutes",
+          "display": "R900"
+        }
+      ]
+    },
+    {
+      "name": "Signature Facial",
+      "category": "facials",
+      "description": "Professional services to cleanse, refresh and nourish your skin.",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/warm-spa-facial-treatment.jpg",
+      "prices": [
+        {
+          "label": "30 Minutes",
+          "display": "R280"
+        },
+        {
+          "label": "60 Minutes",
+          "display": "R400"
+        }
+      ]
+    },
+    {
+      "name": "Neck & Shoulder Massage",
+      "category": "other",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-neck-and-shoulder-massage.jpg",
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R220"
+        }
+      ]
+    },
+    {
+      "name": "Scalp Massage",
+      "category": "other",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-spa-scalp-massage.jpg",
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R120"
+        }
+      ]
+    },
+    {
+      "name": "Hand Massage",
+      "category": "other",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-teal-spa-hand-massage.jpg",
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R100"
+        }
+      ]
+    },
+    {
+      "name": "Hand & Shoulder Massage",
+      "category": "other",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/tranquil-teal-room-massage-session.jpg",
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R280"
+        }
+      ]
+    },
+    {
+      "name": "Body Back Massage",
+      "category": "other",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/professional-spa-massage-therapy.jpg",
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R350"
+        }
+      ]
+    },
+    {
+      "name": "Manual Lymph Drainage",
+      "category": "addons",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-teal-spa-abdominal-massage.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R680"
+        },
+        {
+          "label": "90 Minutes",
+          "display": "R850"
+        }
+      ]
+    },
+    {
+      "name": "Reflexology Massage",
+      "category": "addons",
+      "description": "Targeted pressure points to encourage relaxation and overall well-being.",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/tranquil-teal-walled-reflexology-spa.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R500"
+        }
+      ]
+    },
+    {
+      "name": "Pregnancy Massage",
+      "category": "addons",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/serene-prenatal-massage-in-a-modern-spa.jpg",
+      "prices": [
+        {
+          "label": "60 Minutes",
+          "display": "R450"
+        }
+      ]
+    },
+    {
+      "name": "Ultimate Relaxation",
+      "category": "packages",
+      "description": "Includes:",
+      "inclusions": [
+        "60-minute full body massage",
+        "Hot stones",
+        "Refreshing scalp massage"
+      ],
+      "image_path": "assets/images/gallery/web/serene-spa-retreat-with-rose-petals.jpg",
+      "prices": [
+        {
+          "label": "For one person",
+          "display": "R450"
+        }
+      ]
+    },
+    {
+      "name": "Couples Retreat",
+      "category": "packages",
+      "description": "",
+      "inclusions": [],
+      "image_path": "assets/images/gallery/web/tranquil-teal-twin-treatment-room.jpg",
+      "prices": [
+        {
+          "label": "60-Minute Couples Massage Side by Side",
+          "display": "R500"
+        },
+        {
+          "label": "90-Minute Couples Massage with hot stones",
+          "display": "R1,100"
+        }
+      ]
+    }
+  ],
+  "promotions": [
+    {
+      "name": "Me-Time Special",
+      "inclusions": [
+        "60-minute Swedish Massage",
+        "Complimentary drink",
+        "Gown & slippers"
+      ],
+      "prices": [
+        {
+          "label": "Per person",
+          "display": "R380 P/P"
+        },
+        {
+          "label": "Hot stones",
+          "display": "R100"
+        }
+      ],
+      "image_path": "assets/images/gallery/web/relaxed-garden-spa-portrait.jpg"
+    },
+    {
+      "name": "Couples Massage Specials",
+      "inclusions": [
+        "60 minutes",
+        "Complimentary drink",
+        "Gown & slippers",
+        "Relaxation experience"
+      ],
+      "prices": [
+        {
+          "label": "Swedish Couples Massage",
+          "display": "R500"
+        },
+        {
+          "label": "Hot Stone Couples Massage",
+          "display": "R700"
+        },
+        {
+          "label": "Hot Stones",
+          "display": "R100"
+        },
+        {
+          "label": "Body Scrub",
+          "display": "R100"
+        },
+        {
+          "label": "Foot Massage",
+          "display": "R150"
+        },
+        {
+          "label": "Sip & Paint",
+          "display": "R100 p/p"
+        }
+      ],
+      "image_path": "assets/images/gallery/web/tranquil-teal-twin-treatment-room.jpg"
+    },
+    {
+      "name": "Birthday Package",
+      "inclusions": [
+        "60-minute Swedish Massage",
+        "Foot massage / Hot stones",
+        "Complimentary drink",
+        "Snack platter",
+        "Small gift"
+      ],
+      "prices": [
+        {
+          "label": "Price",
+          "display": "R600"
+        }
+      ],
+      "image_path": "assets/images/gallery/web/spa-welcome-with-a-birthday-message.jpg"
+    },
+    {
+      "name": "Group Wellness Special",
+      "inclusions": [
+        "60-minute massage",
+        "Hot stones",
+        "Lunch (wings & chips)",
+        "Complimentary drink (green tea / wine / juice)"
+      ],
+      "prices": [
+        {
+          "label": "1 Person",
+          "display": "R550"
+        },
+        {
+          "label": "2 People",
+          "display": "R900"
+        },
+        {
+          "label": "3 People",
+          "display": "R1,200"
+        },
+        {
+          "label": "4 People",
+          "display": "R1,600"
+        },
+        {
+          "label": "Groups of 10 people",
+          "display": "20% discount"
+        }
+      ],
+      "image_path": "assets/images/gallery/web/joyful-outdoor-spa-celebration.jpg"
+    }
+  ]
+}

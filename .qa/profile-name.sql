@@ -1,0 +1,36 @@
+begin;
+set local plpgsql.check_asserts=on;
+do $$
+declare owner_uid uuid:=gen_random_uuid(); staff_uid uuid:=gen_random_uuid(); customer_uid uuid:=gen_random_uuid(); owner_session uuid:=gen_random_uuid(); staff_session uuid:=gen_random_uuid(); customer_session uuid:=gen_random_uuid(); rejected boolean; result jsonb;
+begin
+  rejected:=false;begin perform public.spa_update_profile('Guest');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Guests cannot update a profile';
+  insert into auth.users(id,email) values(owner_uid,'qa-profile-owner@example.invalid'),(staff_uid,'qa-profile-staff@example.invalid'),(customer_uid,'qa-profile-customer@example.invalid');
+  insert into auth.sessions(id,user_id) values(owner_session,owner_uid),(staff_session,staff_uid),(customer_session,customer_uid);
+  insert into public.spa_admins(user_id,role,display_name) values(owner_uid,'owner',''),(staff_uid,'admin','Original Staff');
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',owner_uid,'role','authenticated','session_id',owner_session)::text,true);
+  assert public.spa_staff_identity()->>'name'='Owner','Unnamed owner retains readable fallback';
+  result:=public.spa_update_profile('  Adivhaho Mudau  ');
+  assert result->>'name'='Adivhaho Mudau' and result->>'role'='owner';
+  assert public.spa_is_owner(),'Name update preserves owner authorisation';
+  assert public.spa_staff_identity()->>'name'='Adivhaho Mudau','Public profile receives saved name';
+  assert public.spa_admin_data()->>'viewer_name'='Adivhaho Mudau';
+  assert public.spa_admin_data()->>'viewer_display_name'='Adivhaho Mudau';
+  assert exists(select 1 from jsonb_array_elements(public.spa_admin_data()->'staff') s where s->>'id'=owner_uid::text and s->>'name'='Adivhaho Mudau' and s->>'role'='owner'),'Staff table/report source shows owner name';
+  rejected:=false;begin perform public.spa_update_profile('   ');exception when raise_exception then rejected:=true;end;assert rejected,'Blank names rejected';
+  rejected:=false;begin perform public.spa_update_profile(repeat('a',101));exception when raise_exception then rejected:=true;end;assert rejected,'Overlong names rejected';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',staff_uid,'role','authenticated','session_id',staff_session)::text,true);
+  perform public.spa_update_profile('Ṱshilidziḓa Mokoena');
+  assert (select display_name='Ṱshilidziḓa Mokoena' from public.spa_admins where user_id=staff_uid),'Unicode name persisted';
+  assert (select display_name='Adivhaho Mudau' and role='owner' from public.spa_admins where user_id=owner_uid),'Staff cannot rename owner';
+  perform public.spa_update_profile('Owner');
+  assert not public.spa_is_owner() and public.spa_admin_data()->>'viewer_role'='admin','Display name never grants owner permissions';
+  assert not has_table_privilege('authenticated','public.spa_admins','update'),'Direct role/name writes remain revoked';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',customer_uid,'role','authenticated','session_id',customer_session)::text,true);
+  rejected:=false;begin perform public.spa_update_profile('Customer');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Non-staff account denied';
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',staff_uid,'role','authenticated','session_id',staff_session)::text,true);
+  delete from auth.sessions where id=staff_session;
+  rejected:=false;begin perform public.spa_update_profile('Revoked');exception when insufficient_privilege then rejected:=true;end;assert rejected,'Logged-out staff denied';
+  assert not has_function_privilege('anon','public.spa_update_profile(text)','execute');
+end $$;
+rollback;
+select 'PASS: owner and staff can save their own display names; name appears in public identity, viewer profile and staff/report source; Unicode and validation checked; roles and other accounts unchanged; guests, customers and revoked sessions denied. Fixtures rolled back.' as result;

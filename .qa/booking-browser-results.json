@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "viewports": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "guest": true,
+  "admin": true,
+  "fixtureEmail": "qa-browser@example.invalid",
+  "errors": []
+}

@@ -11,8 +11,19 @@
   <link rel="stylesheet" href="css/contact.css">
   <script src="js/global.js" defer></script>
   <script src="js/contact.js" defer></script>
+<link rel="stylesheet" href="css/loader.css">
+<script src="js/loader.js"></script>
+<script src="js/spa-api.js" defer></script>
+<script src="js/staff-profile.js" defer></script>
+<link rel="stylesheet" href="css/booking-modal.css">
+<script src="js/booking-modal.js" defer></script>
+<link rel="stylesheet" href="css/dialog-behavior.css">
+<script src="js/dialog-behavior.js" defer></script>
 </head>
 <body>
+<!-- ADELAIDE WELLNESS SPA LOADER -->
+<div id="page-loader" class="page-loader" role="status" aria-live="polite"><div class="loader-wrap"><div class="loader-ring"><div class="spa-mark" aria-hidden="true"><span class="leaf leaf-left"></span><span class="leaf leaf-center"></span><span class="leaf leaf-right"></span></div></div></div><span class="loader-status">Loading Adelaide Wellness &amp; Spa…</span></div>
+
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header container">
     <a class="brand" href="index.html" aria-label="Adelaide Wellness and Spa home"><img src="assets/images/logo/Adelaide%20Wellness%20Spa%20Emblem.png" alt="Adelaide Wellness & Spa" width="180" height="120"></a>
@@ -24,13 +35,13 @@
       <a href="packages.html">Specials &amp; Offers</a>
       <a href="gallery.html">Gallery</a>
       <a href="contact.html" aria-current="page">Contact</a>
-      <a class="button button-dark" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now</a>
+      <a class="button button-dark" href="booking.html" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now</a>
     </nav>
   </header>
   <main id="main" class="page-main contact-main">
     <section class="contact-hero" aria-labelledby="contact-title">
       <svg class="contact-shape-definitions" aria-hidden="true" focusable="false" width="0" height="0"><defs><clipPath id="contact-image-clip" clipPathUnits="objectBoundingBox"><path d="M.525 0H1V1H.047C.242 .747 .27 .639 .183 .453C.087 .246 .15 .039 .525 0Z"/></clipPath></defs></svg>
-      <div class="contact-hero-image" role="img" aria-label="Contact hero image placeholder"><span>Contact Hero Image</span></div>
+      <div class="contact-hero-image"><img src="assets/images/gallery/web/smiling-welcome-at-adelaide-spa.jpg" alt="A welcome outside Adelaide Wellness &amp; Spa" width="1254" height="1254" fetchpriority="high" decoding="async"></div>
       <div class="container contact-hero-inner"><div class="contact-hero-copy">
         <p class="eyebrow">Contact us</p>
         <h1 id="contact-title">We’re Here<br>For You</h1>
@@ -72,7 +83,7 @@
     <section class="contact-cta dark-section" aria-labelledby="cta-title">
       <div class="container cta-content">
       <div class="contact-cta-copy"><h2 id="cta-title">Book Your Relaxation<br>Experience Today</h2><span class="contact-gold-rule" aria-hidden="true"></span><p>Whether you’re planning a solo escape, a couples retreat,<br class="desktop-break"> or a group experience, we’re here to help.</p></div>
-      <a class="button button-gold" href="https://wa.me/27673030683" target="_blank" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now <span aria-hidden="true">&rarr;</span></a>
+      <a class="button button-gold" href="booking.html" rel="noopener noreferrer"><span class="icon" data-icon="calendar" aria-hidden="true"></span>Book now <span aria-hidden="true">&rarr;</span></a>
       </div>
     </section>
   </main>
@@ -84,6 +95,7 @@
       <div class="social-links" aria-label="Social media"><!-- Add verified profile URLs when available. --><span class="social-icon facebook" role="img" aria-label="Facebook">f</span><span class="social-icon instagram" role="img" aria-label="Instagram"><span class="icon" data-icon="instagram" aria-hidden="true"></span></span><span class="social-icon tiktok" role="img" aria-label="TikTok">♪</span></div>
     </div>
     <div class="footer-bottom container"><span class="footer-rule" aria-hidden="true"></span><p>Relax. Restore. Rejuvenate.</p><span class="footer-rule" aria-hidden="true"></span><small>A wellness experience for a better you.</small></div>
+    <p class="developer-credit">Developed and designed by <a class="developer-link" href="https://hadiniholdings.co.za" target="_blank" rel="noopener noreferrer">Hadini Holdings</a></p>
   </footer>
 </body>
 </html>

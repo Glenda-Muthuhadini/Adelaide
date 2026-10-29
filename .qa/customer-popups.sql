@@ -1,0 +1,73 @@
+begin;
+set local role anon;
+do $$
+declare c jsonb; sel jsonb; q jsonb; receipt jsonb; retry jsonb; offer_row jsonb; opt jsonb; addon jsonb; d date:=current_date+240; rid uuid:=gen_random_uuid(); begin
+ c:=public.spa_customer_catalogue();
+ assert jsonb_array_length(c->'services')>=16;
+ assert not c?'staff' and not c?'bookings';
+ for opt in select distinct on ((o->>'duration')::integer) o from jsonb_array_elements(c->'options') o where (o->>'price_people')::integer=1 order by (o->>'duration')::integer loop
+   q:=public.spa_customer_quote(jsonb_build_object('option_id',opt->>'id','addons','[]'::jsonb),d+3,'09:00',1);
+   assert (q->>'duration')::integer=(opt->>'duration')::integer;
+   assert (q->>'total_cents')::integer=(opt->>'price_cents')::integer;
+   assert (q->'sessions'->0->>'ends_at')::timestamptz-(q->'sessions'->0->>'starts_at')::timestamptz=make_interval(mins=>(opt->>'duration')::integer);
+ end loop;
+ select p into offer_row from jsonb_array_elements(c->'promotions') p where p->>'name'='Couples Massage Specials';
+ assert offer_row is not null;
+ sel:=jsonb_build_object('promotion_id',offer_row->>'id','rate',0,'addons','[]'::jsonb);
+ q:=public.spa_customer_quote(sel,d,'10:00',2);
+ assert (q->>'total_cents')::integer=50000;
+ assert (q->>'duration')::integer=60;
+ sel:=sel||jsonb_build_object('rate',1);
+ q:=public.spa_customer_quote(sel,d,'10:00',2);
+ assert (q->>'total_cents')::integer=70000;
+ select a into addon from jsonb_array_elements(c->'addons') a where a->>'name'='Hot Stones';
+ sel:=sel||jsonb_build_object('addons',jsonb_build_array(jsonb_build_object('id',addon->>'id','rate',0)));
+ q:=public.spa_customer_quote(sel,d,'10:00',2);
+ assert (q->>'total_cents')::integer=80000;
+ assert (q->>'duration')::integer=60;
+ assert jsonb_array_length(q->'lines')=2;
+ begin perform public.spa_customer_quote(sel,d,'10:00',3);raise exception 'odd couples accepted';exception when raise_exception then assert sqlerrm<>'odd couples accepted';end;
+ receipt:=public.spa_customer_submit(sel,d,'10:00',2,'QA Popup','0673030683','qa-popup@example.invalid',q->>'quote',rid);
+ assert receipt->>'status'='confirmed';
+ retry:=public.spa_customer_submit(sel,d,'10:00',2,'QA Popup','0673030683','qa-popup@example.invalid',q->>'quote',rid);
+ assert retry->>'reference'=receipt->>'reference';
+ begin perform public.spa_customer_submit(sel,d,'11:00',2,'QA Popup','0673030683','qa-popup@example.invalid',q->>'quote',rid);raise exception 'changed retry accepted';exception when raise_exception then assert sqlerrm<>'changed retry accepted';end;
+ begin perform public.spa_customer_quote(sel,d,'10:00',4);raise exception 'overbooking accepted';exception when raise_exception then assert sqlerrm<>'overbooking accepted';end;
+ select p into offer_row from jsonb_array_elements(c->'promotions') p where p->>'name'='Me-Time Special';
+ sel:=jsonb_build_object('promotion_id',offer_row->>'id','rate',0,'addons','[]'::jsonb);
+ q:=public.spa_customer_quote(sel,d,'10:00',2);
+ assert (q->>'total_cents')::integer=76000;
+ perform public.spa_customer_submit(sel,d,'10:00',2,'QA Other','0673030683','qa-other@example.invalid',q->>'quote',gen_random_uuid());
+ begin perform public.spa_customer_quote(sel,d,'10:00',1);raise exception 'cross service overbooking';exception when raise_exception then assert sqlerrm<>'cross service overbooking';end;
+ select p into offer_row from jsonb_array_elements(c->'promotions') p where p->>'name'='Group Wellness Special';
+ sel:=jsonb_build_object('promotion_id',offer_row->>'id','rate',0,'addons','[]'::jsonb);
+ q:=public.spa_customer_quote(sel,d+1,'10:00',10);
+ assert (q->>'total_cents')::integer=328000;
+ assert jsonb_array_length(q->'sessions')=3;
+ assert (q->'sessions'->2->>'people')::integer=2;
+ q:=public.spa_customer_quote(sel,d+1,'10:00',5);
+ assert (q->>'total_cents')::integer=215000;
+ assert jsonb_array_length(public.spa_customer_availability(sel,d+1,10))>0;
+ begin perform public.spa_customer_quote(sel,d+1,'17:00',10);raise exception 'closing time accepted';exception when raise_exception then assert sqlerrm<>'closing time accepted';end;
+ select a into addon from jsonb_array_elements(c->'addons') a where a->>'name'='Body Scrub';
+ sel:=sel||jsonb_build_object('addons',jsonb_build_array(jsonb_build_object('id',addon->>'id','rate',0)));
+ begin perform public.spa_customer_quote(sel,d+1,'10:00',1);raise exception 'unlinked addon accepted';exception when raise_exception then assert sqlerrm<>'unlinked addon accepted';end;
+ assert not has_table_privilege('anon','public.spa_bookings','select');
+ assert not has_table_privilege('anon','public.spa_notes','select');
+ raise notice 'PASS: public catalogue privacy, both couples choices, add-on prices, 60-minute total, odd couples, immediate confirmation, idempotency, changed retries, cross-service capacity, group 10 discount and 4/4/2 sessions, 5-person tiers, closing time, linked extras and private records.';
+end; $$;
+reset role;
+do $$ declare b public.spa_bookings; q jsonb; before_count integer; begin
+ select * into b from public.spa_bookings where customer_name='QA Popup' and email='qa-popup@example.invalid';
+ assert b.booking_details->'lines'->1->>'name' like 'Hot Stones%';
+ assert (b.booking_details->>'extra_minutes')::integer=0;
+ assert b.duration=60 and b.total_cents=80000;
+ -- Cancellation releases only this reservation while other guests keep their spaces.
+ update public.spa_bookings set status='cancelled' where id=b.id;
+ q:=public.spa_customer_quote(b.booking_details->'selection',current_date+240,'10:00',2);
+ assert (q->>'total_cents')::integer=80000;
+ -- Price/add-on snapshots survive catalogue changes.
+ update public.spa_addons set price_cents=1 where name='Hot Stones';
+ assert (select total_cents from public.spa_bookings where id=b.id)=80000;
+end; $$;
+rollback;

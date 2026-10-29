@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "individual": {
+    "appointments": {
+      "pages": 1,
+      "bytes": 224844
+    },
+    "clients": {
+      "pages": 1,
+      "bytes": 96000
+    },
+    "services": {
+      "pages": 2,
+      "bytes": 452822
+    },
+    "addons": {
+      "pages": 1,
+      "bytes": 165429
+    },
+    "promotions": {
+      "pages": 1,
+      "bytes": 209399
+    },
+    "staff": {
+      "pages": 1,
+      "bytes": 63275
+    }
+  },
+  "combinedPages": 7,
+  "downloads": 7,
+  "viewports": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "unicodeText": true,
+  "accessRevalidated": true
+}

@@ -1,0 +1,621 @@
+{
+  "staff": [
+    {
+      "id": "42f7ec11-c5a6-41e0-85a6-095255d6a255",
+      "name": "Owner",
+      "role": "owner",
+      "email": "adivhahomudau3@gmail.com",
+      "active": true
+    }
+  ],
+  "addons": [
+    {
+      "id": "0a9efc07-778d-429e-ba30-e96043c16d58",
+      "name": "Manual Lymph Drainage",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "60 Minutes",
+          "price_cents": 68000
+        },
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "90 Minutes",
+          "price_cents": 85000
+        }
+      ],
+      "standalone": true,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 68000,
+      "service_ids": [],
+      "promotion_ids": []
+    },
+    {
+      "id": "c2ec6753-1f9e-46f3-94b2-6d1cfc92474f",
+      "name": "Reflexology Massage",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "60 Minutes",
+          "price_cents": 50000
+        }
+      ],
+      "standalone": true,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "Targeted pressure points to encourage relaxation and overall well-being.",
+      "price_cents": 50000,
+      "service_ids": [],
+      "promotion_ids": []
+    },
+    {
+      "id": "e804b3b4-fde9-45d2-a3b3-9aecc85d6567",
+      "name": "Pregnancy Massage",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "60 Minutes",
+          "price_cents": 45000
+        }
+      ],
+      "standalone": true,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 45000,
+      "service_ids": [],
+      "promotion_ids": []
+    },
+    {
+      "id": "5e35b12c-dc68-4050-a2ff-600412b4b786",
+      "name": "Hot Stones",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "flat",
+          "label": "Price",
+          "price_cents": 10000
+        }
+      ],
+      "standalone": false,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 10000,
+      "service_ids": [],
+      "promotion_ids": [
+        "91803f36-bd1c-47f5-aff9-48dca9b2758f",
+        "5836cefa-6e62-492d-a8a9-1a98bb53cc79"
+      ]
+    },
+    {
+      "id": "08532435-57f5-4af1-a941-2b6c067b2765",
+      "name": "Body Scrub",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "flat",
+          "label": "Price",
+          "price_cents": 10000
+        }
+      ],
+      "standalone": false,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 10000,
+      "service_ids": [],
+      "promotion_ids": [
+        "5836cefa-6e62-492d-a8a9-1a98bb53cc79"
+      ]
+    },
+    {
+      "id": "7bd30af0-be75-4ee8-8a37-9aea2ca95b81",
+      "name": "Foot Massage",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "flat",
+          "label": "Price",
+          "price_cents": 15000
+        }
+      ],
+      "standalone": false,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 15000,
+      "service_ids": [],
+      "promotion_ids": [
+        "5836cefa-6e62-492d-a8a9-1a98bb53cc79"
+      ]
+    },
+    {
+      "id": "34c0d108-ad64-422c-87f8-ba7a0573f9a7",
+      "name": "Sip & Paint",
+      "active": true,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "Price",
+          "price_cents": 10000
+        }
+      ],
+      "standalone": false,
+      "updated_at": "2026-10-29T19:20:10.78241+00:00",
+      "description": "",
+      "price_cents": 10000,
+      "service_ids": [],
+      "promotion_ids": [
+        "5836cefa-6e62-492d-a8a9-1a98bb53cc79"
+      ]
+    }
+  ],
+  "options": [
+    {
+      "id": "59467845-5389-4f94-87e0-8f4e59e7e1c6",
+      "active": true,
+      "duration": 60,
+      "service_id": "8dbc004b-71f5-41f9-84c0-3f4f77b8738c",
+      "price_cents": 50000,
+      "price_people": 1
+    },
+    {
+      "id": "39e2b471-7ea7-4ea7-9037-9c202fd4b8bd",
+      "active": true,
+      "duration": 90,
+      "service_id": "8dbc004b-71f5-41f9-84c0-3f4f77b8738c",
+      "price_cents": 75000,
+      "price_people": 1
+    },
+    {
+      "id": "31939429-7374-49b1-bfe1-bec077399293",
+      "active": true,
+      "duration": 60,
+      "service_id": "14260d08-bb3c-4edd-9cd1-4d6d7b636a70",
+      "price_cents": 55000,
+      "price_people": 1
+    },
+    {
+      "id": "298116e7-625e-4923-bfb5-159b131efb17",
+      "active": true,
+      "duration": 90,
+      "service_id": "14260d08-bb3c-4edd-9cd1-4d6d7b636a70",
+      "price_cents": 80000,
+      "price_people": 1
+    },
+    {
+      "id": "9a7ce746-f44b-4e5b-b4a2-018ce43c1a06",
+      "active": true,
+      "duration": 60,
+      "service_id": "9ce4cd76-0b09-4b6d-a7b7-8342a460788f",
+      "price_cents": 60000,
+      "price_people": 1
+    },
+    {
+      "id": "7161f77f-2f49-42f3-bf99-a2f0b41d7878",
+      "active": true,
+      "duration": 90,
+      "service_id": "9ce4cd76-0b09-4b6d-a7b7-8342a460788f",
+      "price_cents": 85000,
+      "price_people": 1
+    },
+    {
+      "id": "d0b4546e-d54c-4f6d-99af-53a2772ec749",
+      "active": true,
+      "duration": 30,
+      "service_id": "fe106fd0-52e1-48bb-82e2-1401b679768c",
+      "price_cents": 28000,
+      "price_people": 1
+    },
+    {
+      "id": "46586c11-ddd4-4e46-883c-5d6aaaad7495",
+      "active": true,
+      "duration": 60,
+      "service_id": "fe106fd0-52e1-48bb-82e2-1401b679768c",
+      "price_cents": 60000,
+      "price_people": 1
+    },
+    {
+      "id": "907372ea-87fa-45dc-845d-6a2f73f5b33f",
+      "active": true,
+      "duration": 90,
+      "service_id": "ea0ae4fa-8d18-4249-b074-ea9d44383d3e",
+      "price_cents": 90000,
+      "price_people": 1
+    },
+    {
+      "id": "36ebf22b-dd5e-4e40-bbea-8921511d0115",
+      "active": true,
+      "duration": 30,
+      "service_id": "fb0f0b24-1a83-46f2-a4f2-6212aa8578f6",
+      "price_cents": 28000,
+      "price_people": 1
+    },
+    {
+      "id": "df1f2ae7-4617-4c47-ab47-c822210f3e7d",
+      "active": true,
+      "duration": 60,
+      "service_id": "fb0f0b24-1a83-46f2-a4f2-6212aa8578f6",
+      "price_cents": 40000,
+      "price_people": 1
+    },
+    {
+      "id": "f973c910-ab96-4ba9-ad84-9de264b8e275",
+      "active": true,
+      "duration": 60,
+      "service_id": "05e64cf1-1462-4208-97a6-b61e956783d8",
+      "price_cents": 68000,
+      "price_people": 1
+    },
+    {
+      "id": "76874c7b-ad2d-4ca8-86ce-1a254f1ab0c5",
+      "active": true,
+      "duration": 90,
+      "service_id": "05e64cf1-1462-4208-97a6-b61e956783d8",
+      "price_cents": 85000,
+      "price_people": 1
+    },
+    {
+      "id": "4db5c843-73c0-4fc7-aba6-07cc31ffc5a3",
+      "active": true,
+      "duration": 60,
+      "service_id": "0c98a3a0-5a49-4d17-9647-5f1dd250d45f",
+      "price_cents": 50000,
+      "price_people": 1
+    },
+    {
+      "id": "a69f92b4-8a4f-4685-a753-6c6a6f52c28b",
+      "active": true,
+      "duration": 60,
+      "service_id": "080a3320-8bce-4561-b725-336ab5148762",
+      "price_cents": 45000,
+      "price_people": 1
+    },
+    {
+      "id": "8aba441b-58dc-4bc4-bdb0-8907f93273b1",
+      "active": true,
+      "duration": 60,
+      "service_id": "07b31c29-1862-48cc-9a16-5abb21b2b3c8",
+      "price_cents": 50000,
+      "price_people": 2
+    },
+    {
+      "id": "0e85e859-fbfb-4025-a305-9052595ef601",
+      "active": true,
+      "duration": 90,
+      "service_id": "07b31c29-1862-48cc-9a16-5abb21b2b3c8",
+      "price_cents": 110000,
+      "price_people": 2
+    }
+  ],
+  "services": [
+    {
+      "id": "ea0ae4fa-8d18-4249-b074-ea9d44383d3e",
+      "name": "Adelaide Signature Massage",
+      "active": true,
+      "category": "massages",
+      "deleted_at": null,
+      "image_path": "assets/images/hero/Serene%20Warm-Lit%20Spa%20Massage.png",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "32920df8-d1ab-4982-a0c5-694ee293190c",
+      "name": "Body Back Massage",
+      "active": true,
+      "category": "other",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/professional-spa-massage-therapy.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": 35000,
+      "preparation_minutes": null
+    },
+    {
+      "id": "07b31c29-1862-48cc-9a16-5abb21b2b3c8",
+      "name": "Couples Retreat",
+      "active": true,
+      "category": "packages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/tranquil-teal-twin-treatment-room.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "14260d08-bb3c-4edd-9cd1-4d6d7b636a70",
+      "name": "Deep Tissue Massage",
+      "active": true,
+      "category": "massages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-teal-walled-spa-massage.jpg",
+      "inclusions": [],
+      "description": "Focused pressure to relieve muscle tension and promote recovery.",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "bc19e6d0-8d0d-4f9d-a171-7cd86463b6ad",
+      "name": "Hand & Shoulder Massage",
+      "active": true,
+      "category": "other",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/tranquil-teal-room-massage-session.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": 28000,
+      "preparation_minutes": null
+    },
+    {
+      "id": "a039691d-9da6-428e-bc5b-49b5f7c24404",
+      "name": "Hand Massage",
+      "active": true,
+      "category": "other",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-teal-spa-hand-massage.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": 10000,
+      "preparation_minutes": null
+    },
+    {
+      "id": "9ce4cd76-0b09-4b6d-a7b7-8342a460788f",
+      "name": "Hot Stone Massage",
+      "active": true,
+      "category": "massages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/tranquil-hot-stone-spa-treatment.jpg",
+      "inclusions": [],
+      "description": "Soothing warmth for deep relaxation and stress relief.",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "05e64cf1-1462-4208-97a6-b61e956783d8",
+      "name": "Manual Lymph Drainage",
+      "active": true,
+      "category": "addons",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-teal-spa-abdominal-massage.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "0aa2fe3d-075c-49ec-8685-05ca49aec187",
+      "name": "Neck & Shoulder Massage",
+      "active": true,
+      "category": "other",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-neck-and-shoulder-massage.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": 22000,
+      "preparation_minutes": null
+    },
+    {
+      "id": "080a3320-8bce-4561-b725-336ab5148762",
+      "name": "Pregnancy Massage",
+      "active": true,
+      "category": "addons",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-prenatal-massage-in-a-modern-spa.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "0c98a3a0-5a49-4d17-9647-5f1dd250d45f",
+      "name": "Reflexology Massage",
+      "active": true,
+      "category": "addons",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/tranquil-teal-walled-reflexology-spa.jpg",
+      "inclusions": [],
+      "description": "Targeted pressure points to encourage relaxation and overall well-being.",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "a09c6c23-a59e-45e7-8903-50ba9de91f81",
+      "name": "Scalp Massage",
+      "active": true,
+      "category": "other",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-spa-scalp-massage.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": 12000,
+      "preparation_minutes": null
+    },
+    {
+      "id": "fb0f0b24-1a83-46f2-a4f2-6212aa8578f6",
+      "name": "Signature Facial",
+      "active": true,
+      "category": "facials",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/warm-spa-facial-treatment.jpg",
+      "inclusions": [],
+      "description": "Professional services to cleanse, refresh and nourish your skin.",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "fe106fd0-52e1-48bb-82e2-1401b679768c",
+      "name": "Sports Massage",
+      "active": true,
+      "category": "massages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/tranquil-spa-massage-in-teal-room.jpg",
+      "inclusions": [],
+      "description": "",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "8dbc004b-71f5-41f9-84c0-3f4f77b8738c",
+      "name": "Swedish Massage",
+      "active": true,
+      "category": "massages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/professional-spa-massage-therapy.jpg",
+      "inclusions": [],
+      "description": "Relaxing full-body massage to ease tension and improve circulation.",
+      "base_price_cents": null,
+      "preparation_minutes": null
+    },
+    {
+      "id": "03681e35-e051-4fc1-969d-3c8a90eceb13",
+      "name": "Ultimate Relaxation",
+      "active": true,
+      "category": "packages",
+      "deleted_at": null,
+      "image_path": "assets/images/gallery/web/serene-spa-retreat-with-rose-petals.jpg",
+      "inclusions": [
+        "60-minute full body massage",
+        "Hot stones",
+        "Refreshing scalp massage"
+      ],
+      "description": "Includes:",
+      "base_price_cents": 45000,
+      "preparation_minutes": null
+    }
+  ],
+  "promotions": [
+    {
+      "id": "91803f36-bd1c-47f5-aff9-48dca9b2758f",
+      "name": "Me-Time Special",
+      "active": true,
+      "ends_on": null,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_person",
+          "label": "Per person",
+          "price_cents": 38000
+        }
+      ],
+      "starts_on": null,
+      "image_path": "assets/images/gallery/web/relaxed-garden-spa-portrait.jpg",
+      "inclusions": [
+        "60-minute Swedish Massage",
+        "Complimentary drink",
+        "Gown & slippers"
+      ],
+      "description": ""
+    },
+    {
+      "id": "5836cefa-6e62-492d-a8a9-1a98bb53cc79",
+      "name": "Couples Massage Specials",
+      "active": true,
+      "ends_on": null,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_couple",
+          "label": "Swedish Couples Massage",
+          "price_cents": 50000
+        },
+        {
+          "kind": "fixed",
+          "unit": "per_couple",
+          "label": "Hot Stone Couples Massage",
+          "price_cents": 70000
+        }
+      ],
+      "starts_on": null,
+      "image_path": "assets/images/gallery/web/tranquil-teal-twin-treatment-room.jpg",
+      "inclusions": [
+        "60 minutes",
+        "Complimentary drink",
+        "Gown & slippers",
+        "Relaxation experience"
+      ],
+      "description": ""
+    },
+    {
+      "id": "974813ef-a8a3-456b-b3ec-0cede7065cb3",
+      "name": "Birthday Package",
+      "active": true,
+      "ends_on": null,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "flat",
+          "label": "Price",
+          "price_cents": 60000
+        }
+      ],
+      "starts_on": null,
+      "image_path": "assets/images/gallery/web/spa-welcome-with-a-birthday-message.jpg",
+      "inclusions": [
+        "60-minute Swedish Massage",
+        "Foot massage / Hot stones",
+        "Complimentary drink",
+        "Snack platter",
+        "Small gift"
+      ],
+      "description": ""
+    },
+    {
+      "id": "5f7a239a-2ba8-478a-808e-8576b80f582b",
+      "name": "Group Wellness Special",
+      "active": true,
+      "ends_on": null,
+      "pricing": [
+        {
+          "kind": "fixed",
+          "unit": "per_group",
+          "label": "1 Person",
+          "price_cents": 55000
+        },
+        {
+          "kind": "fixed",
+          "unit": "per_group",
+          "label": "2 People",
+          "price_cents": 90000
+        },
+        {
+          "kind": "fixed",
+          "unit": "per_group",
+          "label": "3 People",
+          "price_cents": 120000
+        },
+        {
+          "kind": "fixed",
+          "unit": "per_group",
+          "label": "4 People",
+          "price_cents": 160000
+        },
+        {
+          "kind": "discount",
+          "unit": "per_group",
+          "label": "Groups of 10 people",
+          "discount_percent": 20
+        }
+      ],
+      "starts_on": null,
+      "image_path": "assets/images/gallery/web/joyful-outdoor-spa-celebration.jpg",
+      "inclusions": [
+        "60-minute massage",
+        "Hot stones",
+        "Lunch (wings & chips)",
+        "Complimentary drink (green tea / wine / juice)"
+      ],
+      "description": ""
+    }
+  ]
+}

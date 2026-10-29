@@ -88,14 +88,14 @@ function send(method, params = {}, sessionId) {
       placeholders: document.querySelectorAll('.image-placeholder, .about-placeholder, .service-placeholder, .specials-placeholder, .gallery-placeholder, .contact-hero-image').length,
       logoLoaded: [...document.images].every(image => image.complete && image.naturalWidth > 0),
       icons: [...document.querySelectorAll('[data-icon]')].every(icon => icon.querySelector('svg')),
-      booking: [...document.querySelectorAll('a[target="_blank"]:not(.contact-directions)')].every(a => a.href.startsWith('https://wa.me/27673030683'))
+      booking: [...document.querySelectorAll('a[target="_blank"]:not(.contact-directions):not(.gallery-photo-link):not(.developer-link)')].every(a => a.href.startsWith('https://wa.me/27673030683'))
     }))()`);
     if (metrics.scroll > width) console.log(await evaluate('[...document.querySelectorAll("body *")].filter(e => e.getBoundingClientRect().right > innerWidth + 1).map(e => ({tag:e.tagName, class:e.className, right:e.getBoundingClientRect().right})).slice(0,20)'));
     assert(metrics.scroll <= width, `Horizontal overflow at ${width}: ${metrics.scroll}`);
     assert.equal(metrics.sections, isContact ? 3 : isSpecials ? 5 : isServices || isGallery ? 4 : 7);
     assert.equal(metrics.treatments, isServices ? 16 : isAbout || isSpecials || isGallery || isContact ? 0 : 4);
     assert.equal(metrics.packages, isSpecials ? 4 : isAbout || isServices || isGallery || isContact ? 0 : 4);
-    assert.equal(metrics.placeholders, isContact ? 1 : isGallery ? 10 : isSpecials ? 6 : isServices ? 17 : isAbout ? 5 : 14);
+    assert.equal(metrics.placeholders, isContact ? 1 : isGallery ? 25 : isSpecials ? 6 : isServices ? 17 : isAbout ? 5 : 14);
     assert(metrics.logoLoaded && metrics.icons && metrics.booking);
     if (isServices || isGallery || isContact) {
       const banner = await evaluate('(() => { const element = document.querySelector(".service-cta, .gallery-cta, .contact-cta"); const rect = element.getBoundingClientRect(); return {left:rect.left,right:rect.right,width:document.documentElement.clientWidth,radius:getComputedStyle(element).borderRadius,hasContent:!!element.querySelector(".container.cta-content")}; })()');
@@ -134,8 +134,8 @@ function send(method, params = {}, sessionId) {
     }
     if (isGallery) {
       assert(await evaluate('document.querySelector("[aria-current=page]").getAttribute("href") === "gallery.html"'));
-      assert.equal(await evaluate('document.querySelectorAll(".gallery-tile").length'), 9);
-      for (const [category, count] of [['spa', 3], ['services', 2], ['relaxation', 2], ['experiences', 2], ['all', 9]]) {
+      assert.equal(await evaluate('document.querySelectorAll(".gallery-tile").length'), 24);
+      for (const [category, count] of [['spa', 3], ['services', 1], ['relaxation', 7], ['experiences', 13], ['all', 24]]) {
         await evaluate(`document.querySelector('[data-gallery-filter="${category}"]').click()`);
         assert.equal(await evaluate('document.querySelectorAll(".gallery-tile:not([hidden])").length'), count);
         assert.equal(await evaluate('document.querySelectorAll(".gallery-filter[aria-pressed=true]").length'), 1);
@@ -181,7 +181,7 @@ function send(method, params = {}, sessionId) {
   if (compareFooter) console.log('PASS shared footer styles, dimensions, typography, colours and spacing at all tested widths.');
   for (const link of links) {
     if (/^(https?:|tel:|#)/.test(link)) continue;
-    assert(existsSync(resolve(decodeURIComponent(link))), 'Missing local file: ' + link);
+    assert(existsSync(resolve(decodeURIComponent(link.split(/[?#]/)[0]))), 'Missing local file: ' + link);
   }
   assert.equal(errors.length, 0, errors.join('\n'));
   assert(!/<style\b|style=|<script(?![^>]*src=)/i.test(readFileSync(page, 'utf8')));

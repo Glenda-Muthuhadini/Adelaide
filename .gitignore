@@ -1,0 +1,8 @@
+# Browser QA profiles can contain session data and are never source artifacts.
+.qa/*browser-profile*/
+.qa/report-downloads-*/
+supabase/.temp/
+node_modules/
+.env
+.env.*
+!.env.example

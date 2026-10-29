@@ -13,7 +13,11 @@
 .gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 15px; }
 .gallery-tile { min-width: 0; }
 .gallery-placeholder { display: grid; place-items: center; position: relative; overflow: hidden; background: linear-gradient(125deg, #e6ded0, #eee6d9 50%, #e4dbcd); color: #867a66; border-radius: 11px; }
-.gallery-tile .gallery-placeholder { width: 100%; aspect-ratio: 1.72; }
+.gallery-tile .gallery-placeholder { width: 100%; aspect-ratio: 1; }
+.gallery-placeholder > a { position: absolute; inset: 0; display: block; }
+.gallery-placeholder > a > img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transition: transform .25s; }
+.gallery-placeholder > a:hover > img { transform: scale(1.025); }
+.gallery-placeholder > a:focus-visible { outline-offset: -4px; }
 .gallery-placeholder > span { text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 1.3px; opacity: .65; }
 .gallery-placeholder small { display: block; margin-top: 6px; font-size: 11px; font-weight: 400; text-transform: none; letter-spacing: .2px; }
 .gallery-placeholder > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -55,7 +59,7 @@
   .gallery-filters { width: 100%; flex-wrap: wrap; justify-content: center; border-radius: 24px; margin-bottom: 20px; gap: 4px; padding: 5px; }
   .gallery-filter { min-height: max(44px, var(--tap-target, 0px)); font-size: 12px; padding-inline: 14px; }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-  .gallery-tile .gallery-placeholder { aspect-ratio: 1.25; }
+  .gallery-tile .gallery-placeholder { aspect-ratio: 1; }
   .gallery-placeholder > span { font-size: 9px; letter-spacing: .5px; padding-inline: 8px; }
   .gallery-placeholder small { font-size: 10px; }
   .gallery-testimonial { grid-template-columns: 95px minmax(0, 1fr); gap: 20px; padding: 23px 20px; border-radius: 15px; }
@@ -77,6 +81,6 @@
 @media (max-width: 350px) {
   .gallery-hero h1 { font-size: 35px; }
   .gallery-grid { grid-template-columns: 1fr; }
-  .gallery-tile .gallery-placeholder { aspect-ratio: 1.72; }
+  .gallery-tile .gallery-placeholder { aspect-ratio: 1; }
 }
 

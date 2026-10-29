@@ -1,0 +1,328 @@
+{
+  "usage": [
+    {
+      "page": "index.html",
+      "slot": "image-placeholder treatment-image",
+      "photo": "Professional Spa Massage Therapy.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "image-placeholder package-image",
+      "photo": "Tranquil Teal Twin Treatment Room.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "image-placeholder package-image",
+      "photo": "Spa Welcome with a Birthday Message.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "image-placeholder package-image",
+      "photo": "Joyful Outdoor Spa Celebration.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "image-placeholder gallery-image",
+      "photo": "Serene Teal Spa Treatment Room.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "image-placeholder gallery-image",
+      "photo": "Sunlit Spa Lounge with Sunflowers.png"
+    },
+    {
+      "page": "about.html",
+      "slot": "about-placeholder story-image",
+      "photo": "Smiling Welcome at Adelaide Spa.png"
+    },
+    {
+      "page": "about.html",
+      "slot": "about-placeholder philosophy-image",
+      "photo": "Tranquil Teal Twin Treatment Room.png"
+    },
+    {
+      "page": "about.html",
+      "slot": "about-placeholder values-image",
+      "photo": "Serene Spa Retreat with Rose Petals.png"
+    },
+    {
+      "page": "about.html",
+      "slot": "about-placeholder team-image",
+      "photo": "Professional Spa Massage Therapy.png"
+    },
+    {
+      "page": "about.html",
+      "slot": "about-placeholder facility-image",
+      "photo": "Serene Teal Spa Treatment Room.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "service-placeholder services-hero-image",
+      "photo": "Professional Spa Massage Therapy.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "service-placeholder catalogue-image",
+      "photo": "Professional Spa Massage Therapy.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "service-placeholder catalogue-image",
+      "photo": "Professional Spa Massage Therapy.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "service-placeholder catalogue-image",
+      "photo": "Serene Spa Retreat with Rose Petals.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "service-placeholder catalogue-image",
+      "photo": "Tranquil Teal Twin Treatment Room.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder specials-hero-image",
+      "photo": "Elegant Outdoor Spa Retreat.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder special-card-image",
+      "photo": "Relaxed Garden Spa Portrait.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder special-card-image",
+      "photo": "Tranquil Teal Twin Treatment Room.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder special-card-image",
+      "photo": "Spa Welcome with a Birthday Message.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder special-card-image",
+      "photo": "Joyful Outdoor Spa Celebration.png"
+    },
+    {
+      "page": "packages.html",
+      "slot": "specials-placeholder custom-specials-image",
+      "photo": "Elegant Mother’s Day Brunch Table.png"
+    },
+    {
+      "page": "contact.html",
+      "slot": "contact-hero-image",
+      "photo": "Smiling Welcome at Adelaide Spa.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "Hot Stone Massage",
+      "photo": "Tranquil Hot Stone Spa Treatment.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Hot Stone Massage",
+      "photo": "Tranquil Hot Stone Spa Treatment.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "Facials",
+      "photo": "Warm Spa Facial Treatment.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Signature Facial",
+      "photo": "Warm Spa Facial Treatment.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "Reflexology",
+      "photo": "Tranquil Teal-Walled Reflexology Spa.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Reflexology Massage",
+      "photo": "Tranquil Teal-Walled Reflexology Spa.png"
+    },
+    {
+      "page": "index.html",
+      "slot": "Corporate Wellness",
+      "photo": "Joyful Poolside Wellness Spa Pose.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Sports Massage",
+      "photo": "Tranquil Spa Massage in Teal Room.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Neck & Shoulder Massage",
+      "photo": "Serene Neck and Shoulder Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Scalp Massage",
+      "photo": "Serene Spa Scalp Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Hand Massage",
+      "photo": "Serene Teal Spa Hand Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Adelaide Signature Massage",
+      "photo": "assets/images/hero/Serene Warm-Lit Spa Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Manual Lymph Drainage",
+      "photo": "Serene Teal Spa Abdominal Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Deep Tissue Massage",
+      "photo": "Serene Teal-Walled Spa Massage.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Hand & Shoulder Massage",
+      "photo": "Tranquil Teal Room Massage Session.png"
+    },
+    {
+      "page": "services.html",
+      "slot": "Pregnancy Massage",
+      "photo": "Serene Prenatal Massage in a Modern Spa.png"
+    }
+  ],
+  "gallery": [
+    {
+      "file": "cheerful-spa-portrait-with-floral-trellis.jpg",
+      "alt": "A guest beside a floral trellis in the spa",
+      "category": "relaxation"
+    },
+    {
+      "file": "elegant-mother-s-day-brunch-table.jpg",
+      "alt": "A Mother?s Day table with flowers, drinks and brunch",
+      "category": "experiences"
+    },
+    {
+      "file": "elegant-outdoor-spa-retreat.jpg",
+      "alt": "Two guests relaxing on the outdoor spa terrace",
+      "category": "experiences"
+    },
+    {
+      "file": "elegant-terrace-spa-retreat.jpg",
+      "alt": "Guests sharing a quiet moment on the spa terrace",
+      "category": "experiences"
+    },
+    {
+      "file": "joyful-outdoor-spa-celebration.jpg",
+      "alt": "Three guests celebrating together in spa robes",
+      "category": "experiences"
+    },
+    {
+      "file": "joyful-poolside-wellness-spa-pose.jpg",
+      "alt": "Two guests celebrating beside the swimming pool",
+      "category": "experiences"
+    },
+    {
+      "file": "outdoor-garden-spa-wellness-scene.jpg",
+      "alt": "A guest and spa staff in the outdoor garden treatment area",
+      "category": "experiences"
+    },
+    {
+      "file": "poolside-wellness-spa-moment.jpg",
+      "alt": "A guest in a spa robe beside the swimming pool",
+      "category": "relaxation"
+    },
+    {
+      "file": "professional-spa-massage-therapy.jpg",
+      "alt": "A therapist providing a back massage",
+      "category": "services"
+    },
+    {
+      "file": "relaxed-garden-spa-portrait.jpg",
+      "alt": "A guest relaxing in garden seating",
+      "category": "relaxation"
+    },
+    {
+      "file": "relaxing-spa-portrait-with-smartphone.jpg",
+      "alt": "A guest seated beside a treatment bed",
+      "category": "relaxation"
+    },
+    {
+      "file": "serene-spa-retreat-with-rose-petals.jpg",
+      "alt": "A guest beside a rose-petal treatment setup",
+      "category": "relaxation"
+    },
+    {
+      "file": "serene-teal-spa-treatment-room.jpg",
+      "alt": "Prepared massage beds in the teal treatment room",
+      "category": "spa"
+    },
+    {
+      "file": "smiling-sisters-at-the-wellness-spa.jpg",
+      "alt": "Two guests smiling together outside the spa",
+      "category": "experiences"
+    },
+    {
+      "file": "smiling-welcome-at-adelaide-spa.jpg",
+      "alt": "A warm welcome outside Adelaide Wellness & Spa",
+      "category": "spa"
+    },
+    {
+      "file": "spa-lounge-conversations.jpg",
+      "alt": "Guests chatting in the lounge?s yellow chairs",
+      "category": "experiences"
+    },
+    {
+      "file": "spa-welcome-with-a-birthday-message.jpg",
+      "alt": "A birthday welcome message at Adelaide Wellness & Spa",
+      "category": "experiences"
+    },
+    {
+      "file": "spa-welcome-with-wellness-signboard.jpg",
+      "alt": "A guest beside the Adelaide Wellness Spa signboard",
+      "category": "experiences"
+    },
+    {
+      "file": "sunlit-outdoor-spa-lounge-retreat.jpg",
+      "alt": "A guest unwinding in a colourful outdoor lounge chair",
+      "category": "relaxation"
+    },
+    {
+      "file": "sunlit-spa-courtyard-portrait.jpg",
+      "alt": "A guest enjoying the sunshine in the spa courtyard",
+      "category": "relaxation"
+    },
+    {
+      "file": "sunlit-spa-lounge-with-sunflowers.jpg",
+      "alt": "Guests relaxing in the spa lounge beside sunflowers",
+      "category": "experiences"
+    },
+    {
+      "file": "tranquil-teal-twin-treatment-room.jpg",
+      "alt": "Two prepared treatment beds in a teal spa room",
+      "category": "spa"
+    },
+    {
+      "file": "tranquil-teal-wall-spa-retreat.jpg",
+      "alt": "Guests resting on adjacent treatment beds",
+      "category": "experiences"
+    },
+    {
+      "file": "welcome-to-adelaide-wellness-spa.jpg",
+      "alt": "A young guest holding the Adelaide Wellness Spa welcome sign",
+      "category": "experiences"
+    }
+  ],
+  "totals": {
+    "all": 24,
+    "relaxation": 7,
+    "experiences": 13,
+    "services": 1,
+    "spa": 3
+  }
+}
