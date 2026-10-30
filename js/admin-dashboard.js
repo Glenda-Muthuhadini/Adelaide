@@ -151,11 +151,11 @@ function renderModule(section) {
   }else if(section==='Staff'){
     content='<h2>Staff</h2><p class="module-copy">Staff access is reserved for owner-authorised accounts.</p>'+cards([[adminName,'Salon Manager · Preview profile'],['Staff invitations','Staff invitations and permissions will be available when authentication is connected.']]);
   }else if(section==='Availability'){
-    content='<h2>Availability</h2><p class="module-copy">The preview uses Adelaide’s published operating hours.</p>'+table(['Day','Opening hours','Service capacity'],['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map(d=>[d,'09:00–19:00','4 people at the same time']))+'<p class="module-copy">30-minute intervals. Treatments reserve capacity for their full 30, 60, or 90 minutes. Groups over four are split into consecutive sessions. Shared room and therapist limits will be configured during backend setup.</p>';
+    content='<h2>Availability</h2><p class="module-copy">The preview uses Adelaide’s published operating hours.</p>'+table(['Day','Opening hours','Service capacity'],['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map(d=>[d,d==='Sunday'?'09:00–14:00':'09:00–17:00','4 people at the same time']))+'<p class="module-copy">30-minute intervals. Treatments reserve capacity for their full 30, 60, or 90 minutes. Groups over four are split into consecutive sessions. Shared room and therapist limits will be configured during backend setup.</p>';
   }else if(section==='Reports'){
     content='<h2>Daily overview</h2><p class="module-copy">Sample activity for '+escapeHtml(localDate(selectedDate).toLocaleDateString('en-ZA',{dateStyle:'full'}))+'.</p>'+cards([['Appointments',String(rows.length)+' bookings'],['People expected',String(rows.filter(a=>a.status!=='cancelled').reduce((sum,a)=>sum+a.people,0))+' people'],['Completed',String(rows.filter(a=>a.status==='completed').length)+' treatments'],['Pending',String(rows.filter(a=>a.status==='pending').length)+' awaiting confirmation'],['Walk-ins',String(rows.filter(a=>a.type==='walkin').length)+' bookings'],['Cancelled',String(rows.filter(a=>a.status==='cancelled').length)+' bookings']]);
   }else if(section==='Profile settings'){
-    content='<h2>Profile settings</h2><p class="module-copy">Update the display name for this preview. Changes last until you refresh.</p><form id="profile-form" class="dialog-fields"><label>Display name<input name="admin-name" maxlength="60" value="'+escapeHtml(adminName)+'" required></label><div><button class="button button-dark" type="submit">Save display name</button></div></form><p class="module-copy">Adelaide Wellness & Spa · Africa/Johannesburg<br>Operating hours: 09:00–19:00, Monday–Sunday<br>Customers book without an account. Admin authentication is pending backend setup.</p>';
+    content='<h2>Profile settings</h2><p class="module-copy">Update the display name for this preview. Changes last until you refresh.</p><form id="profile-form" class="dialog-fields"><label>Display name<input name="admin-name" maxlength="60" value="'+escapeHtml(adminName)+'" required></label><div><button class="button button-dark" type="submit">Save display name</button></div></form><p class="module-copy">Adelaide Wellness & Spa · Africa/Johannesburg<br>Operating hours: Monday–Saturday 09:00–17:00; Sunday 09:00–14:00<br>Customers book without an account. Admin authentication is pending backend setup.</p>';
   }
   panel.innerHTML=content;
 }
@@ -228,7 +228,7 @@ $('#appointment-form').addEventListener('submit',event=>{
   const fail=message=>{$('#booking-error').textContent=message;$('#booking-error').hidden=false;$('#booking-error').focus();};
   if(![30,60,90].includes(duration)||!Number.isInteger(count)||count<1||count>40)return fail('Choose a valid duration and a group size between 1 and 40.');
   while(remaining>0){
-    if(cursor+duration>1140)return fail('The full booking must fit before 7:00 PM. Choose an earlier start time or a different date.');
+    if(cursor+duration>(new Date(date+'T12:00:00').getDay()===0?840:1020))return fail('The full booking must fit before closing: 5:00 PM Monday?Saturday or 2:00 PM Sunday. Choose an earlier start time or a different date.');
     let batch=Math.min(4,remaining);
     while(batch>0&&!hasSpace(service,date,cursor,duration,batch,planned))batch--;
     if(batch===0)return fail('There is not enough capacity in consecutive sessions for this booking. Choose another start time.');

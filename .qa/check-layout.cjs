@@ -127,7 +127,7 @@ function send(method, params = {}, sessionId) {
       assert(await evaluate('[...document.querySelectorAll("a[href^=tel]")].every(link => link.getAttribute("href") === "tel:+27673030683")'));
       const destination = await evaluate('new URL(document.querySelector(".contact-directions").href).searchParams.get("destination")');
       assert.equal(destination, 'Adelaide Wellness & Spa, Unit E, Samvuni Street, Hamagidi, Thohoyandou, South Africa');
-      assert(await evaluate('document.querySelector(".contact-hours-card").textContent.includes("09:00") && document.querySelector(".contact-hours-card").textContent.includes("19:00")'));
+      assert(await evaluate('["09:00","17:00","14:00","Sunday"].every(text=>document.querySelector(".contact-hours-card").textContent.includes(text))'));
       assert(existsSync('assets/icons/contact-botanical.svg'));
       assert(await evaluate('!!document.querySelector("#contact-image-clip")'));
       assert.equal(await evaluate('getComputedStyle(document.querySelector(".contact-methods")).gridTemplateColumns.split(" ").length'), width <= 520 ? 1 : width <= 1000 ? 2 : 4);
